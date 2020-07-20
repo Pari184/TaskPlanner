@@ -1,3 +1,17 @@
+body {
+    background-color: beige;
+}
+
+h1 {
+    text-align: center;
+}
+
 .container {
+    padding: 20px;
+    margin-top: 20px;
     width: 60%
+}
+
+li button {
+    float: right;
 }
