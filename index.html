@@ -11,15 +11,83 @@
 
 <body>
     <h1>Landing Page</h1>
+    <h2>Today's Tasks..</h2>
     <div class="outside">
         <div class="container ">
+            <!-- functionalities for the Add Task-->
+            <button class="btn btn-primary mb-5" data-toggle="modal" data-target="#addModal">Add Task</button>
+            <div class="modal fade" id="addModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Task Details</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="taskname">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="textarea" class="form-control" id="textdescription">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
+                                    <div class="col-sm-9">
+                                        <input type="dropdown" class="form-control" id="assignedto">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control" id="duedate">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="status">Status</label>
+                                    <div class="col-sm-6">
+                                        <select id="status" name="status" class="col-sm-6">
+                                            <option value="notstarted">Select</option>
+                                             <option value="notstarted">Not Started</option>
+                                             <option value="inprogress">In Progress</option>
+                                             <option value="invalid">Invalid</option>
+                                             <option value="completed">Completed</option>
+                                         </select>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="modal-footer-group">
+                                <button class="btn btn-primary mr-2">Reset</button>
+                                <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+                                <button class="btn btn-success mr-2">Add Task</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- functionalities for the view Task1-->
-            <ul class="list-group">
-                <li class="list-group-item">Task 1
+            <ul class="list-group mt-3">
+                <li class="list-group-item">Sprint Stand-up Meeting
 
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">View
 
                 </button>
+
                     <div class="collapse" id="collapseExample1">
                         <div class="card card-body">
                             <form>
@@ -86,6 +154,7 @@
                                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                                             <div class="col-sm-6">
                                                 <select id="status" name="status" class="col-sm-6">
+                                                    <option value="notstarted">Select</option>
                                                     <option value="notstarted">Not Started</option>
                                                     <option value="inprogress">In Progress</option>
                                                     <option value="invalid">Invalid</option>
@@ -98,7 +167,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
                                         <button class="btn btn-success mr-2">Save</button>
 
 
@@ -110,7 +179,7 @@
 
                 </li>
                 <!-- functionalities for the View Task2-->
-                <li class="list-group-item">Task 2
+                <li class="list-group-item">Coding for Ticket 1
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">View
 
                     </button>
@@ -180,6 +249,7 @@
                                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                                             <div class="col-sm-6">
                                                 <select id="status" name="status" class="col-sm-6">
+                                                    <option value="notstarted">Select</option>
                                                         <option value="notstarted">Not Started</option>
                                                         <option value="inprogress">In Progress</option>
                                                         <option value="invalid">Invalid</option>
@@ -192,7 +262,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
                                         <button class="btn btn-success mr-2">Save</button>
 
 
@@ -204,7 +274,7 @@
 
                 </li>
                 <!-- functionalities for the view Task3-->
-                <li class="list-group-item">Task 3
+                <li class="list-group-item">Peer code Review
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">View
 
                     </button>
@@ -274,6 +344,7 @@
                                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                                             <div class="col-sm-6">
                                                 <select id="status" name="status" class="col-sm-6">
+                                                    <option value="notstarted">Select</option>
                                                         <option value="notstarted">Not Started</option>
                                                         <option value="inprogress">In Progress</option>
                                                         <option value="invalid">Invalid</option>
@@ -286,7 +357,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
                                         <button class="btn btn-success mr-2">Save</button>
 
 
@@ -298,7 +369,7 @@
 
                 </li>
                 <!-- functionalities for the view Task4-->
-                <li class="list-group-item">Task 4
+                <li class="list-group-item">Functional Testing
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">View
 
                     </button>
@@ -368,6 +439,7 @@
                                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                                             <div class="col-sm-6">
                                                 <select id="status" name="status" class="col-sm-6">
+                                                    <option value="notstarted">Select</option>
                                                         <option value="notstarted">Not Started</option>
                                                         <option value="inprogress">In Progress</option>
                                                         <option value="invalid">Invalid</option>
@@ -380,7 +452,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
                                         <button class="btn btn-success mr-2">Save</button>
 
 
@@ -392,7 +464,7 @@
 
                 </li>
                 <!--functionalities for view Task5-->
-                <li class="list-group-item">Task 5
+                <li class="list-group-item">End to End Testing.
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">View
 
                     </button>
@@ -462,6 +534,7 @@
                                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                                             <div class="col-sm-6">
                                                 <select id="status" name="status" class="col-sm-6">
+                                                    <option value="notstarted">Select</option>
                                                         <option value="notstarted">Not Started</option>
                                                         <option value="inprogress">In Progress</option>
                                                         <option value="invalid">Invalid</option>
@@ -474,7 +547,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
                                         <button class="btn btn-success mr-2">Save</button>
 
 
@@ -486,71 +559,7 @@
 
                 </li>
             </ul>
-            <!-- functionalities for the Add Task-->
-            <button class="btn btn-primary mt-5" data-toggle="modal" data-target="#addModal">Add Task</button>
-            <div class="modal fade" id="addModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Task Details</h5>
-                            <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
 
-                            <form>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="taskname">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
-                                    <div class="col-sm-9">
-                                        <input type="textarea" class="form-control" id="textdescription">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
-                                    <div class="col-sm-9">
-                                        <input type="dropdown" class="form-control" id="assignedto">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
-                                    <div class="col-sm-9">
-                                        <input type="date" class="form-control" id="duedate">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="status">Status</label>
-                                    <div class="col-sm-6">
-                                        <select id="status" name="status" class="col-sm-6">
-                                            <option value="notstarted">Not Started</option>
-                                            <option value="inprogress">In Progress</option>
-                                            <option value="invalid">Invalid</option>
-                                            <option value="completed">Completed</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="modal-footer-group">
-                                <button class="btn btn-primary mr-2">Reset</button>
-                                <button class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
-                                <button class="btn btn-success mr-2">Add Task</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
