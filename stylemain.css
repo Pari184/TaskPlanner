@@ -1,29 +1,37 @@
-body {
-    background-color: beige;
-}
-
-h1 {
-    text-align: center;
-}
-
-.container {
-    padding: 20px;
-    margin-top: 20px;
-    width: 60%
-}
-
-li button {
-    float: right;
-}
-
-
-.modal-header{
-    background-color: rgb(143, 142, 142);
-}
-
-.modal-body{
-    background-color: lightsalmon;
-}
-
-.modal-footer{
-    background-color: lightsalmon;
+                                            body {
+                                            background-color: rgb(243, 222, 221);
+                                        }
+                                        
+                                        #navbarNav {
+                                            background-color: rgb(149, 211, 248);
+                                            width: 100%;
+                                        }
+                                        
+                                        h1 {
+                                            text-align: center;
+                                        }
+                                        
+                                        .container {
+                                            padding: 20px;
+                                            margin-top: 20px;
+                                            width: 60%
+                                        }
+                                        
+                                        li button {
+                                            float: right;
+                                        }
+                                        
+                                        .card-body {
+                                            background-color: rgb(243, 222, 221);
+                                        }
+                                        
+                                        .modal-header {
+                                            background-color: rgb(149, 211, 248);
+                                        }
+                                        
+                                        .modal-body {
+                                            background-color: rgb(243, 222, 221);
+                                        }
+                                        
+                                        .modal-footer {
+                                            background-color: rgb(243, 222, 221);
