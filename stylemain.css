@@ -1,37 +1,36 @@
-                                            body {
-                                            background-color: rgb(243, 222, 221);
-                                        }
+   body {
+   background-color: rgb(243, 222, 221);
+        }
+                          
+  #navbarNav {
+    background-color: rgb(149, 211, 248);
+     width: 100%;
+            }
+                                
+   h1 {
+    text-align: center;
+      }
                                         
-                                        #navbarNav {
-                                            background-color: rgb(149, 211, 248);
-                                            width: 100%;
-                                        }
+  .container {
+    padding: 20px;
+    margin-top: 20px;
+    width: 60%
+    }
                                         
-                                        h1 {
-                                            text-align: center;
-                                        }
+
                                         
-                                        .container {
-                                            padding: 20px;
-                                            margin-top: 20px;
-                                            width: 60%
-                                        }
+.card-body {
+    background-color: rgb(243, 222, 221);
+    }
                                         
-                                        li button {
-                                            float: right;
-                                        }
+.modal-header {
+    background-color: rgb(149, 211, 248);
+    }
                                         
-                                        .card-body {
-                                            background-color: rgb(243, 222, 221);
-                                        }
+.modal-body {
+    background-color: rgb(243, 222, 221);
+    }
                                         
-                                        .modal-header {
-                                            background-color: rgb(149, 211, 248);
-                                        }
-                                        
-                                        .modal-body {
-                                            background-color: rgb(243, 222, 221);
-                                        }
-                                        
-                                        .modal-footer {
-                                            background-color: rgb(243, 222, 221);
+.modal-footer {
+    background-color: rgb(243, 222, 221);
+}

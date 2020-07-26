@@ -18,7 +18,7 @@
                     <a class="nav-link font-weight-bold text-uppercase" href="#today">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold text-uppercase" href="#">Upcoming</a>
+                    <a class="nav-link font-weight-bold text-uppercase" href="#upcoming">Upcoming</a>
                 </li>
 
             </ul>
@@ -27,16 +27,15 @@
     <h1>Welcome!</h1>
     <h2 class="text-center">Task list for today...</h2>
         <div class="outside col-sm-12" id="today">
-            <div class="container ">
+            <div class="container">
             <!-- functionalities for the Add Task-->
             <!--  <a class="text-right" href="#" role="button"  data-toggle="modal" data-target="#addModal">Add New Task <img src="images/plus-circle.svg" alt="Responsive image"></a>-->
             <!-- <button class="btn btn-outline-primary mb-3" data-toggle="modal" data-target="#addModal">Add Task  <img src="images/plus-circle.svg" alt="Responsive image"></button> -->
-             <ul class="list-group mt-3">
-                <li class="list-group-item">
+                <div class="addtask text-right">
                 <a href="#collapseExample1" data-toggle="modal" data-target="#addModal"><img src="images/plus-circle.svg" alt="Responsive image"> <b>Add Task</b>
                 </a>
-                </li>
-            </ul>
+                </div>
+                
                 <div class="modal fade" id="addModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -101,76 +100,187 @@
                     </div>
                 </div>
             </div>
-            <!-- functionalities for the view Task1-->
-            <ul class="list-group mt-3">
+
+
+
+            <!-- functionalities for the view Task1-->        
+            <ul class="list-group list-group-flush mt-3">
                 <li class="list-group-item">
-                    <a href="#collapseExample1" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Sprint Stand-up Meeting
+                   <ul class="list-group list-group-flush list-group-horizontal-sm">
+                        <li class="list-group-item">
+                            <a href="#collapseExample1" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Sprint Stand-up Meeting</a>
+                                <div class="collapse" id="collapseExample1">
+                                    <div class="card card-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="taskname">Task Name</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="taskdesc">Task Description</label>
+                                                <input type="textarea" class="form-control" id="exampleInputPassword1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="assinee">Assigned To</label>
+                                                <select class="form-control form-control-sm">
+                                                    <option>Select</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                        </li>
+                       
+                        <!-- functionalities for the Edit Task1-->
+                        <li class="list-group-item">                       
+                            <a data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1"><img src="images/expanddown.svg" href="#"></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a data-toggle="modal" data-target="#editModal" aria-expanded="false" aria-controls="editModal"href="#"><img src="images/pencil.svg" href="#"></a>
+                            <!-- <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button>-->
+                            <div class="modal fade" id="editModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Task Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="taskname">
+                                                        </div>
+                                                </div>
 
-                    </a>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="textarea" class="form-control" id="textdescription">
+                                                        </div>
+                                                </div>
 
-                    <div class="collapse" id="collapseExample1">
-                        <div class="card card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="taskname">Task Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="taskdesc">Task Description</label>
-                                    <input type="textarea" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="assinee">Assigned To</label>
-                                    <select class="form-control form-control-sm">
-                                    <option>Select</option>
-                                  </select>
-                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="dropdown" class="form-control" id="assignedto">
+                                                        </div>
+                                                </div>
 
-                            </form>
-                        </div>
-                    </div>
-                    <!-- functionalities for the Edit Task1-->
-                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button>
-                    <div class="modal fade" id="editModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Task Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="date" class="form-control" id="duedate">
+                                                        </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" for="status">Status</label>
+                                                        <div class="col-sm-6">
+                                                            <select id="status" name="status" class="col-sm-6">
+                                                                <option value="notstarted">Select</option>
+                                                                <option value="notstarted">Not Started</option>
+                                                                <option value="inprogress">In Progress</option>
+                                                                <option value="invalid">Invalid</option>
+                                                                <option value="completed">Completed</option>
+                                                            </select>
+                                                        </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <div class="modal-footer-group">
+                                                <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
+                                                <button class="btn btn-success mr-2" type="submit">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+
+
+                
+                <!-- functionalities for the View Task2 -->
+                <li class="list-group-item">
+                    <ul class="list-group list-group-flush list-group-horizontal-sm">
+                        <li class="list-group-item">
+                            <a href="#collapseExample2" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Coding for Ticket 1</a>
+                            <div class="collapse" id="collapseExample2">
+                                <div class="card card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="taskname">Task Name</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="taskdesc">Task Description</label>
+                                            <input type="textarea" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="assinee">Assigned To</label>
+                                            <select class="form-control form-control-sm">
+                                                <option>Select</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    <!-- functionalities for the Edit Task2
+                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button><button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button">Edit</button>-->
+                    <li class="list-group-item">                       
+                        <a data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1"><img src="images/expanddown.svg" href="#"></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a data-toggle="modal" data-target="#editModal" aria-expanded="false" aria-controls="editModal"href="#"><img src="images/pencil.svg" href="#"></a>
+                            <div class="modal fade" id="editModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Task Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                     <div class="modal-body">
-
                                         <form>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
                                                 <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="taskname">
+                                                    <input type="text" class="form-control" id="taskname">
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
                                                 <div class="col-sm-9">
-                                                <input type="textarea" class="form-control" id="textdescription">
+                                                    <input type="textarea" class="form-control" id="textdescription">
                                                 </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
                                                 <div class="col-sm-9">
-                                                <input type="dropdown" class="form-control" id="assignedto">
+                                                    <input type="dropdown" class="form-control" id="assignedto">
                                                 </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
                                                 <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="duedate">
+                                                    <input type="date" class="form-control" id="duedate">
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
+                                        </div>
+                                        <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" for="status">Status</label>
                                                 <div class="col-sm-6">
                                                     <select id="status" name="status" class="col-sm-6">
@@ -181,6 +291,105 @@
                                                         <option value="completed">Completed</option>
                                                     </select>
                                                 </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="modal-footer-group">
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
+                                        <button class="btn btn-success mr-2" type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+             </ul>
+        </li>
+
+
+        <!-- functionalities for the view Task3 -->
+        <li class="list-group-item">
+            <ul class="list-group list-group-flush list-group-horizontal-sm">
+                <li class="list-group-item">
+                    <a href="#collapseExample3" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">Peer code Review</a>
+                        <div class="collapse" id="collapseExample3">
+                            <div class="card card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="taskname">Task Name</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taskdesc">Task Description</label>
+                                            <input type="textarea" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="assinee">Assigned To</label>
+                                            <select class="form-control form-control-sm">
+                                                <option>Select</option>
+                                            </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- functionalities for the Edit Task3
+                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button>-->
+                    <li class="list-group-item">                       
+                        <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3"><img src="images/expanddown.svg" href="#"></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a data-toggle="modal" data-target="#editModal" aria-expanded="false" aria-controls="editModal"href="#"><img src="images/pencil.svg" href="#"></a>
+                            <div class="modal fade" id="editModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Task Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="taskname">
+                                                    </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="textarea" class="form-control" id="textdescription">
+                                                    </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="dropdown" class="form-control" id="assignedto">
+                                                    </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="date" class="form-control" id="duedate">
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" for="status">Status</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="status" name="status" class="col-sm-6">
+                                                            <option value="notstarted">Select</option>
+                                                            <option value="notstarted">Not Started</option>
+                                                            <option value="inprogress">In Progress</option>
+                                                            <option value="invalid">Invalid</option>
+                                                            <option value="completed">Completed</option>
+                                                        </select>
+                                                    </div>
                                             </div>
                                         </form>
                                     </div>
@@ -194,346 +403,92 @@
                             </div>
                         </div>
                     </li>
-                <!-- functionalities for the View Task2-->
-                <li class="list-group-item">
-                    <a href="#collapseExample2" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Coding for Ticket 1</a>
+            </ul>
+        </li>
 
-                    <div class="collapse" id="collapseExample2">
-                        <div class="card card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="taskname">Task Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="taskdesc">Task Description</label>
-                                    <input type="textarea" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="assinee">Assigned To</label>
-                                    <select class="form-control form-control-sm">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- functionalities for the Edit Task2-->
-                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button><button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button">Edit</button>
-                    <div class="modal fade" id="editModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Task Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="taskname">
-                                            </div>
-                                        </div>
+        <!-- functionalities for the view Task4 -->
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
-                                            <div class="col-sm-9">
-                                                <input type="textarea" class="form-control" id="textdescription">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
-                                            <div class="col-sm-9">
-                                                <input type="dropdown" class="form-control" id="assignedto">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="duedate">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="status">Status</label>
-                                            <div class="col-sm-6">
-                                                <select id="status" name="status" class="col-sm-6">
-                                                    <option value="notstarted">Select</option>
-                                                        <option value="notstarted">Not Started</option>
-                                                        <option value="inprogress">In Progress</option>
-                                                        <option value="invalid">Invalid</option>
-                                                        <option value="completed">Completed</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
-                                        <button class="btn btn-success mr-2" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- functionalities for the view Task3-->
-                <li class="list-group-item">
-                    <a href="#collapseExample3" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">Peer code Review</a>
-
-                    <div class="collapse" id="collapseExample3">
-                        <div class="card card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="taskname">Task Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="taskdesc">Task Description</label>
-                                    <input type="textarea" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="assinee">Assigned To</label>
-                                    <select class="form-control form-control-sm">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- functionalities for the Edit Task3-->
-                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button>
-                    <div class="modal fade" id="editModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Task Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="taskname">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
-                                            <div class="col-sm-9">
-                                                <input type="textarea" class="form-control" id="textdescription">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
-                                            <div class="col-sm-9">
-                                                <input type="dropdown" class="form-control" id="assignedto">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="duedate">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="status">Status</label>
-                                            <div class="col-sm-6">
-                                                <select id="status" name="status" class="col-sm-6">
-                                                    <option value="notstarted">Select</option>
-                                                        <option value="notstarted">Not Started</option>
-                                                        <option value="inprogress">In Progress</option>
-                                                        <option value="invalid">Invalid</option>
-                                                        <option value="completed">Completed</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
-                                        <button class="btn btn-success mr-2" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- functionalities for the view Task4-->
+        <li class="list-group-item">
+            <ul class="list-group list-group-flush list-group-horizontal-sm">
                 <li class="list-group-item">
                     <a href="#collapseExample4" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">Functional Testing</a>
-
-                    <div class="collapse" id="collapseExample4">
-                        <div class="card card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="taskname">Task Name</label>
+                </li>
+                <div class="collapse" id="collapseExample4">
+                    <div class="card card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="taskname">Task Name</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="taskdesc">Task Description</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="taskdesc">Task Description</label>
                                     <input type="textarea" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="assinee">Assigned To</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="assinee">Assigned To</label>
                                     <select class="form-control form-control-sm">
                                         <option>Select</option>
                                     </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- functionalities for the Edit Task4-->
-                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button>
-                    <div class="modal fade" id="editModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Task Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <form>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="taskname">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
-                                            <div class="col-sm-9">
-                                                <input type="textarea" class="form-control" id="textdescription">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
-                                            <div class="col-sm-9">
-                                                <input type="dropdown" class="form-control" id="assignedto">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="duedate">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="status">Status</label>
-                                            <div class="col-sm-6">
-                                                <select id="status" name="status" class="col-sm-6">
-                                                    <option value="notstarted">Select</option>
-                                                        <option value="notstarted">Not Started</option>
-                                                        <option value="inprogress">In Progress</option>
-                                                        <option value="invalid">Invalid</option>
-                                                        <option value="completed">Completed</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="modal-footer-group">
-                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
-                                        <button class="btn btn-success mr-2" type="submit">Save</button>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
+                </div>
+                
+                <!-- functionalities for the Edit Task4 -->
+                <li class="list-group-item">                       
+                    <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3"><img src="images/expanddown.svg" href="#"></a>
                 </li>
-                <!--functionalities for view Task5-->
                 <li class="list-group-item">
-                    <a href="#collapseExample5" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">End to End Testing</a>
-
-                    <div class="collapse" id="collapseExample5">
-                        <div class="card card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="taskname">Task Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
-                                    <label for="taskdesc">Task Description</label>
-                                    <input type="textarea" class="form-control" id="exampleInputPassword1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="assinee">Assigned To</label>
-                                    <select class="form-control form-control-sm">
-                                        <option>Select</option>
-                                      </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- functionalities for the Edit Task5-->
-                    <button class="btn btn-outline-light mr-2" data-toggle="modal" data-target="#editModal" type="button"><img src="images/pencil.svg" href="#"></button>
-                    <div class="modal fade" id="editModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Task Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                    <a data-toggle="modal" data-target="#editModal" aria-expanded="false" aria-controls="editModal"href="#"><img src="images/pencil.svg" href="#"></a>
+                        <div class="modal fade" id="editModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Task Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="taskname">
-                                            </div>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="taskname">
+                                                </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
-                                            <div class="col-sm-9">
-                                                <input type="textarea" class="form-control" id="textdescription">
-                                            </div>
+                                                <div class="col-sm-9">
+                                                    <input type="textarea" class="form-control" id="textdescription">
+                                                </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
-                                            <div class="col-sm-9">
-                                                <input type="dropdown" class="form-control" id="assignedto">
-                                            </div>
+                                                <div class="col-sm-9">
+                                                    <input type="dropdown" class="form-control" id="assignedto">
+                                                </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="duedate">
-                                            </div>
+                                                <div class="col-sm-9">
+                                                    <input type="date" class="form-control" id="duedate">
+                                                </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label" for="status">Status</label>
-                                            <div class="col-sm-6">
-                                                <select id="status" name="status" class="col-sm-6">
-                                                    <option value="notstarted">Select</option>
+                                                <div class="col-sm-6">
+                                                    <select id="status" name="status" class="col-sm-6">
+                                                        <option value="notstarted">Select</option>
                                                         <option value="notstarted">Not Started</option>
                                                         <option value="inprogress">In Progress</option>
                                                         <option value="invalid">Invalid</option>
                                                         <option value="completed">Completed</option>
-                                                </select>
-                                            </div>
+                                                    </select>
+                                                </div>
                                         </div>
                                     </form>
                                 </div>
@@ -548,8 +503,107 @@
                     </div>
                 </li>
             </ul>
-        </div>
-    </div>
+        </li>
+
+        <!--functionalities for view Task5 -->
+        <li class="list-group-item">
+            <ul class="list-group list-group-flush list-group-horizontal-sm">
+                <li class="list-group-item">
+                    <a href="#collapseExample5" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample1">Deploy and Release</a>
+                        <div class="collapse" id="collapseExample5">
+                           <div class="card card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="taskname">Task Name</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taskdesc">Task Description</label>
+                                            <input type="textarea" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="assinee">Assigned To</label>
+                                            <select class="form-control form-control-sm">
+                                                <option>Select</option>
+                                            </select>
+                                    </div>  
+                                </form>
+                            </div>
+                        </div>
+                </li>
+
+                <!-- functionalities for the Edit Task5 -->
+                <li class="list-group-item">                       
+                    <a data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5"><img src="images/expanddown.svg" href="#"></a>
+                </li>
+                <li class="list-group-item">
+                    <a data-toggle="modal" data-target="#editModal" aria-expanded="false" aria-controls="editModal"href="#"><img src="images/pencil.svg" href="#"></a>
+                    <div class="modal fade" id="editModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Task Details</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="taskname">
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
+                                                <div class="col-sm-9">
+                                                    <input type="textarea" class="form-control" id="textdescription">
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
+                                                <div class="col-sm-9">
+                                                    <input type="dropdown" class="form-control" id="assignedto">
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
+                                                <div class="col-sm-9">
+                                                    <input type="date" class="form-control" id="duedate">
+                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="status">Status</label>
+                                                <div class="col-sm-6">
+                                                    <select id="status" name="status" class="col-sm-6">
+                                                        <option value="notstarted">Select</option>
+                                                        <option value="notstarted">Not Started</option>
+                                                        <option value="inprogress">In Progress</option>
+                                                        <option value="invalid">Invalid</option>
+                                                        <option value="completed">Completed</option>
+                                                    </select>
+                                                </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="modal-footer-group">
+                                        <button class="btn btn-danger mr-2" data-dismiss="modal">Delete</button>
+                                        <button class="btn btn-success mr-2" type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+   
 
 
 
