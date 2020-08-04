@@ -10,15 +10,15 @@
 </head>
 
 <body>
-    
-   
+
+
 
     <div class="container-fluid mt-100">
         <h1>Welcome!</h1>
         <h2 class="text-center">Task list for today...</h2>
         <div class="d-flex flex-wrap justify-content-between">
             <div>
-                 <a type="button" class="btn btn-shadow btn-wide btn-primary" href="#collapseExample1" data-toggle="modal" data-target="#addModal"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New Task </a>
+                <a type="button" class="btn btn-shadow btn-wide btn-primary" href="#collapseExample1" data-toggle="modal" data-target="#addModal"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New Task </a>
             </div>
             <!--<div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>-->
         </div>
@@ -95,38 +95,38 @@
         </div>
 
 
-            <div class="modal fade" id="addModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Task Details</h5>
-                            <button type="button" class="close" data-dismiss="modal">
+        <div class="modal fade" id="addModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Task Details</h5>
+                        <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>
+                    </div>
                     <div class="card-body">
                         <form>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="taskName">
-                                    <span id="errMsg"></span>
+                                    <span id="errMsg1"></span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
                                 <div class="col-sm-9">
-                                    <input type="textarea" class="form-control" id="textdescription">
-                                    <span id="errMsg"></span>
+                                    <input type="textarea" class="form-control" id="textDescription">
+                                    <span id="errMsg2"></span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
                                 <div class="col-sm-9">
-                                    <input type="dropdown" class="form-control" id="assignedto">
-                                    <span id="errMsg"></span>
+                                    <input type="dropdown" class="form-control" id="assignedTo">
+                                    <span id="errMsg3"></span>
                                 </div>
                             </div>
 
@@ -160,17 +160,17 @@
                         </div>
                     </div>
                 </div>
-            
 
-            <!--<div class="card-footer">
+
+                <!--<div class="card-footer">
                 <div class="card-footer-group">
                     <button class="btn btn-primary mr-2" type="reset">Reset</button>
                     <button class="btn btn-danger mr-2" type="button" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-success mr-2" type="submit" id="addTask">Add Task</button>
                 </div>
             </div>-->
+            </div>
         </div>
-    </div>
 
 
 
@@ -179,8 +179,10 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  
+        <script src="script1.js"></script>
+
 
 
 </body>
+
 </html>
