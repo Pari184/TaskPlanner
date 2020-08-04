@@ -9,8 +9,7 @@
     <title>Task Planner</title>
 </head>
 
-<body>
-    
+<body>   
    
 
     <div class="container-fluid mt-100">
@@ -22,36 +21,8 @@
             </div>
             <!--<div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>-->
         </div>
-        <div class="card mb-3">
-            <div class="card-header pl-0 pr-0">
-                <div class="row no-gutters w-100 align-items-center">
-                    <div class="col ml-3">Tasks</div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">Edit/Delete</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body py-3">
-                <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">Sprint Stand up</a>
-                    </div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="m-0">
-            <div class="card-body py-3">
-                <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">Sprint Stand up</a>
-                    </div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
+
+
                         </div>
                     </div>
                 </div>
@@ -93,84 +64,6 @@
                 </div>
             </div>
         </div>
-
-
-            <div class="modal fade" id="addModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Task Details</h5>
-                            <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="taskName">
-                                    <span id="errMsg"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
-                                <div class="col-sm-9">
-                                    <input type="textarea" class="form-control" id="textdescription">
-                                    <span id="errMsg"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
-                                <div class="col-sm-9">
-                                    <input type="dropdown" class="form-control" id="assignedto">
-                                    <span id="errMsg"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="duedate">
-                                    <span id="errMsg"></span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="status">Status</label>
-                                <div class="col-sm-6">
-                                    <select id="status" name="status" class="col-sm-6">
-                                        <option value="notstarted">Select</option>
-                                         <option value="notstarted">Not Started</option>
-                                         <option value="inprogress">In Progress</option>
-                                         <option value="invalid">Invalid</option>
-                                         <option value="completed">Completed</option>
-                                     </select>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="modal-footer-group">
-                            <button class="btn btn-primary mr-2" type="reset">Reset</button>
-                            <button class="btn btn-danger mr-2" type="button" data-dismiss="modal">Cancel</button>
-                            <button class="btn btn-success mr-2" type="submit" id="addTask">Add Task</button>
-                        </div>
-                    </div>
-                </div>
-            
-
-            <!--<div class="card-footer">
-                <div class="card-footer-group">
-                    <button class="btn btn-primary mr-2" type="reset">Reset</button>
-                    <button class="btn btn-danger mr-2" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success mr-2" type="submit" id="addTask">Add Task</button>
-                </div>
-            </div>-->
-        </div>
-    </div>
 
 
 
@@ -182,5 +75,7 @@
   
 
 
+
 </body>
+
 </html>
