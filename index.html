@@ -14,15 +14,14 @@
 
 
     <div class="container-fluid mt-100">
-        <h1>Welcome!</h1>
-        <h2 class="text-center">Task list for today...</h2>
+        <h1 class="text-center">Task Planner</h1>
         <div class="d-flex flex-wrap justify-content-between">
             <div>
                 <a type="button" class="btn btn-shadow btn-wide btn-primary" href="#collapseExample1" data-toggle="modal" data-target="#addModal"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New Task </a>
             </div>
             <!--<div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>-->
         </div>
-        <div class="card mb-3">
+        <div class="card mb-3" id="tasksummary">
             <div class="card-header pl-0 pr-0">
                 <div class="row no-gutters w-100 align-items-center">
                     <div class="col ml-3">Tasks</div>
@@ -39,59 +38,12 @@
                     </div>
                     <div class="col-4 text-muted">
                         <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
+                            <div class="col"><img src="images/expanddown.svg"><img src="images/pencil.svg"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr class="m-0">
-            <div class="card-body py-3">
-                <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">Sprint Stand up</a>
-                    </div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="m-0">
-            <div class="card-body py-3">
-                <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">Sprint Stand up</a>
-                    </div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="m-0">
-            <div class="card-body py-3">
-                <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">Sprint Stand up</a>
-                    </div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="m-0">
-            <div class="card-body py-3">
-                <div class="row no-gutters align-items-center">
-                    <div class="col"> <a href="javascript:void(0)" class="text-big" data-abc="true">Sprint Stand up</a>
-                    </div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">12</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
 
@@ -99,13 +51,14 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Task Details</h5>
+                        <h5 class="modal-title">Add Task</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
-                    <div class="card-body">
-                        <form>
+                    
+                        <form id="task-form">
+                            <div class="modal-body">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
                                 <div class="col-sm-9">
@@ -145,17 +98,15 @@
                                 <label class="col-sm-3 col-form-label" for="status">Status</label>
                                 <div class="col-sm-6">
                                     <select id="taskStatus" name="status" class="col-sm-6">
-                                        <option value="select">Select</option>
-                                         <option value="notstarted">Not Started</option>
-                                         <option value="inprogress">In Progress</option>
+                                         <option value="inprogress" selected>In Progress</option>
                                          <option value="invalid">Invalid</option>
                                          <option value="completed">Completed</option>
                                      </select>
                                 </div>
                             </div>
-
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                    
                     <div class="modal-footer">
                         <div class="modal-footer-group">
                             <button class="btn btn-primary mr-2" type="reset">Reset</button>
@@ -164,15 +115,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!--<div class="card-footer">
-                <div class="card-footer-group">
-                    <button class="btn btn-primary mr-2" type="reset">Reset</button>
-                    <button class="btn btn-danger mr-2" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success mr-2" type="submit" id="addTask">Add Task</button>
-                </div>
-            </div>-->
             </div>
         </div>
 

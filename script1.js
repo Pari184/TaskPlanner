@@ -1,55 +1,38 @@
 class Task{
-    constructor(tid, tname, tdesc, assignedto, duedate, status){
-        this.tname = name;
-        this.tdesc = tdesc;
-        this.assignedTo = assignedto;
-        this.duedate = duedate;
+    constructor(id, name, description, assignee, date, status){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.assignee = assignee;
+        this.date = date;
         this.status = status;
-        this.isDeleted = false;
+        this.isDelete = false;
+    }
+    toHTMLString(){
+        const HTML = `
+        <hr class="m-0">
+        <div class="card-body py-3">
+                <div class="row no-gutters align-items-center">
+                    <div class="col"><a href="javascript:void(0)" class="text-big" data-abc="true">${this.name}</a>
+                    </div>
+                    <div class="col-4 text-muted">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col"><img src="images/expanddown.svg"><img src="images/pencil.svg"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        `;
+        const element = document.createRange().createContextualFragment(HTML);
+        return element;
     }
 }
 
-class TaskManager{
-    constructor(){
-        this.currentID = 1;
-        this.tasks = [];
-    }
 
-    getAllTask(){
-        // code to display in the landing page all the tasks!
-        // only with isDeleted true.
-        for(let i=0;i<=this.tasks.length;i++){
-            if(!this.isDeleted)
-            {
-                //return this.tasks[i]; Display the tasks
-                this.newDisplayTask.push(task);
-            }
-        }
-        return newDisplayTask;
-    }
 
-    addTask(tname, tdesc, assignedto, duedate, status){
-        const task = new Task(this.currentID++, tname, tdesc, assignedto,duedate,status);
-        this.tasks.push(task);
-    }
-    displayTask(id){
-        for(let i=0;i<=this.tasks.length;i++){
-            if(this.currentId == id)
-            {
-                //return this.tasks[i];
-            }
-        }
-    }
-    deleteTask(id){
-        //code to delete task
-        this.isDeleted = true;
-    }
-    statusSort(status){
-        // code to filter by status
-    }
-}
 
 let addBtn = document.querySelector("#addTask");
+//let addModal = document.querySelector("#addModal");
 
 addBtn.onclick = function() {
 
@@ -61,8 +44,10 @@ addBtn.onclick = function() {
     let assignedTo = document.querySelector("#assignedTo");
 
 
-    let dueDate = document.querySelector("#dueDate");
-    let taskStatus = document.querySelector("#taskStatus");
+    //let dueDate = document.querySelector("#dueDate");
+    //let taskStatus = document.querySelector("#taskStatus");
+    let dueDate = "07/08/2020";
+    let taskStatus = "Inprogress";
     let checkValid = false;
 
     if (taskName.value == "" || taskName.value.length < 8) {
@@ -114,15 +99,13 @@ addBtn.onclick = function() {
 
 
     if (checkValid == true) {
-        //add task goes here
-        //taskManager.addTask(taskName.value, taskDescription.value, assignedTo.value, dueDate.value, taskStatus.value,"" );
-        //and then call the display task list method
-        //displayTaskList();
+        const taskContainer = document.querySelector('#tasksummary');
+        let newta = new Task(6, taskName.value, textDescription.value, assignedTo.value, dueDate, taskStatus);
+        const element = newta.toHTMLString();
+        //taskContainer.innerHTML = "";
+        taskContainer.append(element);
+        $("#addModal").modal("hide");
     } else {
         return false;
     }
-
-
-
-
-}
+};
