@@ -15,15 +15,15 @@
 
     <div class="container-fluid mt-100">
         <h1 class="text-center">Task Planner</h1>
-        <div class="d-flex flex-wrap justify-content-between">
-            <div>
+        <div class="d-inline-flex flex-wrap justify-content-between">
                 <a type="button" class="btn btn-shadow btn-wide btn-primary" href="#collapseExample1" data-toggle="modal" data-target="#addModal"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New Task </a>
-            </div>
-            <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
-            <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
+                      
+                 <input class="btn btn-shadow btn-wide btn-primary" type="text" class="form-control" placeholder="Search...">
+            
+            
         </div>
         <div class="card mb-3" id="tasksummary">
-            <div class="card-header pl-0 pr-0">
+            <!-- <div class="card-header pl-0 pr-0">
                 <div class="row no-gutters w-100 align-items-center">
                     <div class="col ml-3">Tasks</div>
                     <div class="col-4 text-muted">
@@ -44,8 +44,9 @@
                     </div>
                 </div>
             </div>
-            
+             -->
         </div>
+    </div>
 
 
         <div class="modal fade" id="addModal">
@@ -112,7 +113,6 @@
                     
                     <div class="modal-footer">
                         <div class="modal-footer-group">
-                            <button class="btn btn-primary mr-2" type="reset">Reset</button>
                             <button class="btn btn-danger mr-2" type="button" data-dismiss="modal">Cancel</button>
                             <button class="btn btn-success mr-2" type="submit" id="addTask">Add Task</button>
                         </div>

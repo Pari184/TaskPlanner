@@ -15,9 +15,9 @@ class Task{
         <div class="card-body py-3">
         <div class="row no-gutters align-items-center" id="taskEdit">
             <div class="col"> <p class="text-big"   id="${this.id}" data-abc="true">${this.name}</p>
-            <p class="text-big">${this.description}-${this.assignee}-${this.date}-${this.status} hidden></p>
+            <p class="text-big" ${this.description}-${this.assignee}-${this.date}-${this.status} hidden></p>
             </div>
-            <div class="col-4 text-muted">
+            <div class="col-3 text-muted">
                
                     <button class="edit btn btn-primary ml-2"><i class="icon-edit" style="font-size:24px;color:blue"></i></i></button>
                     <button class="delete btn btn-danger"><i class="fas fa-trash-alt" style="font-size:24px;color:red"></i></i></button>
@@ -94,12 +94,14 @@ class TaskManager {
         this.tasks = this.tasks.filter(
             (t) => t.id !== id);
             //this.display();
+            
+            
 
     }
     // To display all the tasks from "tasks" array.
     display() {
         this.parent.innerHTML = "";
-        const cardheading = `<div class="card mb-3" id="tasksummary">
+        var cardheading = `<div class="card mb-3" id="tasksummary">
         <div class="card-header pl-0 pr-0">
             <div class="row no-gutters w-100 align-items-center">
                 <div class="col ml-3">Tasks</div>
@@ -110,13 +112,16 @@ class TaskManager {
                 </div>
             </div>
         </div>`;
+        if (this.tasks.length < 1){
+            cardheading = "";
+        }
+        else {
         const helement = document.createRange().createContextualFragment(cardheading);
         this.parent.append(helement);
         this.tasks.forEach((task) => {
-            const taskElement = task.toHtmlElement();
-            this.parent.append(taskElement);
-
-        });
+        const taskElement = task.toHtmlElement();
+        this.parent.append(taskElement);
+         });}
 
     }
 }
@@ -171,6 +176,7 @@ var checkValid = false;
 addBtn.onclick = function() {
     
     const name = document.querySelector("#taskName");
+    name.focus();
     const errMsg1 = document.querySelector("#errMsg1");
     const errMsg2 = document.querySelector("#errMsg2");
     const errMsg3 = document.querySelector("#errMsg3");
@@ -236,6 +242,7 @@ addBtn.onclick = function() {
         //const element = newta.toHTMLString();
         //taskContainer.innerHTML = "";
         //taskManager.addTaskToPage(task);
+        //document.forms["#task-form"].reset();
         document.querySelector("#task-form").reset();
         document.getElementsByClassName(".spanclass").innerHTML = "";
         $("#addModal").modal("hide");
