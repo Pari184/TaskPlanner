@@ -1,21 +1,21 @@
 // Class for creating task
-class Task{
-    constructor(id, name, description, assignee, date, status){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.assignee= assignee;
-        this.date = date;
-        this.status = status;
-        this.isDelete = false;
-    }
-    // Function to set the HTML code for all task
-    toHTMLString(){
-        const HTML = `
+class Task {
+    constructor(id, name, description, assignee, date, status) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.assignee = assignee;
+            this.date = date;
+            this.status = status;
+            this.isDelete = false;
+        }
+        // Function to set the HTML code for all task
+    toHTMLString() {
+            const HTML = `
         <div class="card-body py-3">
         <div class="row no-gutters align-items-center" id="taskEdit">
             <div class="col"> <p class="text-big"   id="${this.id}" data-abc="true">${this.name}</p>
-            <p class="text-big" ${this.description}-${this.assignee}-${this.date}-${this.status} hidden></p>
+            <p class="text-big" ${this.description}-${this.assignee}-${this.date}-${this.status}></p>
             </div>
             <div class="col-3 text-muted">
                
@@ -29,37 +29,37 @@ class Task{
     `;
 
 
-        // <div id="${this.id}" class="task col-lg-4 col-md-6 mb-4">
-        // <div class="card">
-        // <div class="card-header">
-        // ${this.date}
-        // </div>
-        // <div class="card-body">
-        // <h5 class="card-title">${this.name}</h5>
-        // <p class="card-text">${this.description}</p>
-        // </div>
-        // <div class="card-footer text-muted">
-        // ${this.assignee}-${this.status}
-        // <button class="edit btn btn-primary btn-sm float-right ml-2"><i class="far fa-edit"></i></button>
-        // <button class="delete btn btn-danger btn-sm float-right"><i class="far fa-trash-alt"></i></button>
-        // </div>
-        // </div>
-        // </div>
-        // ;
-        
-        //const element = document.createRange().createContextualFragment(HTML);
-        return HTML;
-    }
-    // Function to create HTML elements for task
-    toHtmlElement(){
+            // <div id="${this.id}" class="task col-lg-4 col-md-6 mb-4">
+            // <div class="card">
+            // <div class="card-header">
+            // ${this.date}
+            // </div>
+            // <div class="card-body">
+            // <h5 class="card-title">${this.name}</h5>
+            // <p class="card-text">${this.description}</p>
+            // </div>
+            // <div class="card-footer text-muted">
+            // ${this.assignee}-${this.status}
+            // <button class="edit btn btn-primary btn-sm float-right ml-2"><i class="far fa-edit"></i></button>
+            // <button class="delete btn btn-danger btn-sm float-right"><i class="far fa-trash-alt"></i></button>
+            // </div>
+            // </div>
+            // </div>
+            // ;
+
+            //const element = document.createRange().createContextualFragment(HTML);
+            return HTML;
+        }
+        // Function to create HTML elements for task
+    toHtmlElement() {
         const html = this.toHTMLString();
         const element = document.createRange().createContextualFragment(html);
         element
             .querySelector("button.edit")
             .addEventListener("click", editTaskClicked);
-         element
-             .querySelector("button.delete")
-             .addEventListener("click", deleteTaskClicked);
+        element
+            .querySelector("button.delete")
+            .addEventListener("click", deleteTaskClicked);
         return element;
     }
 }
@@ -67,11 +67,11 @@ class Task{
 // Class for managing and accessing the task
 class TaskManager {
     constructor(parent) {
-        this.tasks = [];
-        this.currentId = 1;
-        this.parent = parent;
-    }
-    // Function to add a task and push the task to tasks array.
+            this.tasks = [];
+            this.currentId = 1;
+            this.parent = parent;
+        }
+        // Function to add a task and push the task to tasks array.
     addTask(name, description, assignee, date, status) {
         const task = new Task(`task${this.currentId++}`, name, description, assignee, date, status);
         this.tasks.push(task);
@@ -91,14 +91,14 @@ class TaskManager {
 
     }
     deleteTask(id) {
-        this.tasks = this.tasks.filter(
-            (t) => t.id !== id);
+            this.tasks = this.tasks.filter(
+                (t) => t.id !== id);
             //this.display();
-            
-            
 
-    }
-    // To display all the tasks from "tasks" array.
+
+
+        }
+        // To display all the tasks from "tasks" array.
     display() {
         this.parent.innerHTML = "";
         var cardheading = `<div class="card mb-3" id="tasksummary">
@@ -112,20 +112,20 @@ class TaskManager {
                 </div>
             </div>
         </div>`;
-        if (this.tasks.length < 1){
+        if (this.tasks.length < 1) {
             cardheading = "";
+        } else {
+            const helement = document.createRange().createContextualFragment(cardheading);
+            this.parent.append(helement);
+            this.tasks.forEach((task) => {
+                const taskElement = task.toHtmlElement();
+                this.parent.append(taskElement);
+            });
         }
-        else {
-        const helement = document.createRange().createContextualFragment(cardheading);
-        this.parent.append(helement);
-        this.tasks.forEach((task) => {
-        const taskElement = task.toHtmlElement();
-        this.parent.append(taskElement);
-         });}
 
     }
 }
-  
+
 
 /* code for card heading 
         <div class="card mb-3">
@@ -174,7 +174,7 @@ var checkValid = false;
 
 
 addBtn.onclick = function() {
-    
+
     const name = document.querySelector("#taskName");
     name.focus();
     const errMsg1 = document.querySelector("#errMsg1");
@@ -186,7 +186,7 @@ addBtn.onclick = function() {
 
     const date = document.querySelector("#dueDate");
     const status = document.querySelector("#taskStatus");
-    
+
 
     if (name.value == "" || name.value.length < 8 || !isNaN(name.value)) {
 
@@ -218,7 +218,7 @@ addBtn.onclick = function() {
         checkValid = true;
 
     }
-    if (assignee.value == "" || assignee.value.length < 8  || !isNaN(assignee.value)) {
+    if (assignee.value == "" || assignee.value.length < 8 || !isNaN(assignee.value)) {
 
         errMsg3.innerHTML = "This field cannot be blank and must be 8 chars long";
         assignee.style.borderColor = "red";
@@ -237,7 +237,7 @@ addBtn.onclick = function() {
         //const taskContainer = document.querySelector('#tasksummary');
         taskManager.addTask(name.value, description.value, assignee.value, date.value, status.value);
         taskManager.display();
-        
+
         //taskContainer.append(element);
         //const element = newta.toHTMLString();
         //taskContainer.innerHTML = "";
@@ -246,19 +246,18 @@ addBtn.onclick = function() {
         document.querySelector("#task-form").reset();
         document.getElementsByClassName(".spanclass").innerHTML = "";
         $("#addModal").modal("hide");
-    } 
-    else {
+    } else {
         return false;
     }
 };
 
 edttask.onclick = function() {
-    
+
     const name = document.querySelector("#taskName");
     const errMsg1 = document.querySelector("#errMsg1");
     const errMsg2 = document.querySelector("#errMsg2");
     const errMsg3 = document.querySelector("#errMsg3");
-     const description = document.querySelector("#textDescription");
+    const description = document.querySelector("#textDescription");
     const assignee = document.querySelector("#assignedTo");
 
 
@@ -315,16 +314,16 @@ edttask.onclick = function() {
         //const taskContainer = document.querySelector('#tasksummary');
         taskManager.addTask(name.value, description.value, assignee.value, date.value, status.value, shouldRefresh = true);
         if (shouldRefresh) {
-        //refreshPage(TaskManager.tasks)
-        //const element = task.toHtmlElement();
-        //taskContainer.append(element);
-        taskManager.display();
+            //refreshPage(TaskManager.tasks)
+            //const element = task.toHtmlElement();
+            //taskContainer.append(element);
+            taskManager.display();
         }
         //taskContainer.append(element);
         //const element = newta.toHTMLString();
         //taskContainer.innerHTML = "";
         //taskManager.addTaskToPage(task);
-        
+
         $("#editModal").modal("hide");
     } else {
         return false;
@@ -369,7 +368,7 @@ function editTaskClicked(event) {
     $("#editModal").modal("show");
     //later call the validation function.
 
-    edttask.onclick = function (){
+    edttask.onclick = function() {
         const tid = document.getElementById("editTaskID");
         const tname = document.getElementById("editTaskName");
         const tdesc = document.getElementById("editTextDescription");
@@ -378,14 +377,14 @@ function editTaskClicked(event) {
         const tstatus = document.getElementById("editTaskStatus");
         taskManager.updateTask(tid.value, tname.value, tdesc.value, tassignee.value, tdate.value, tstatus.selected);
         $("#editModal").modal("hide");
-     }
+    }
 
 
-    
+
     //const taskElement = event.target.closest(`${this.id}`);
     //console.log(taskElement);
-     //const task = taskManager.tasks.find((t) => taskElement.id === t.id);
-     //console.log(task);
+    //const task = taskManager.tasks.find((t) => taskElement.id === t.id);
+    //console.log(task);
 
     // console.log(task);
     // taskIdInput.value = task.id;
@@ -395,7 +394,7 @@ function editTaskClicked(event) {
     // date.value = task.date;
     // status.value = task.status;
     //taskManager.updateTask(task.id.value, task.name.value, task.description.value, task.assignee.value, task.date.value, task.status.value);
-    
+
 }
 
 function deleteTaskClicked(event) {
