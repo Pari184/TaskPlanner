@@ -247,7 +247,7 @@ addBtn.onclick = function() {
         //taskManager.addTaskToPage(task);
         //document.forms["#task-form"].reset();
         document.querySelector("#task-form").reset();
-        document.getElementsByClassName(".spanclass").hide();
+        //document.getElementsByClassName(".spanclass").hide();
         $("#addModal").modal("hide");
     } else {
         return false;
