@@ -15,7 +15,10 @@ class Task {
         <div class="card-body py-3">
         <div class="row no-gutters align-items-center" id="taskEdit">
             <div class="col"> <p class="text-big"   id="${this.id}" data-abc="true">${this.name}</p>
-            <p class="text-big" ${this.description}-${this.assignee}-${this.date}-${this.status}></p>
+
+
+            <p class="text-big">${this.description}-${this.assignee}-${this.date}-${this.status}</p>
+
             </div>
             <div class="col-3 text-muted">
                
@@ -170,13 +173,13 @@ const taskIdInput = document.querySelector('#task-id');
 
 const addBtn = document.querySelector("#addTask");
 const edttask = document.querySelector("#editTask");
-var checkValid = false;
+var checkValid = true;
 
 
 addBtn.onclick = function() {
 
     const name = document.querySelector("#taskName");
-    name.focus();
+    //name.focus();
     const errMsg1 = document.querySelector("#errMsg1");
     const errMsg2 = document.querySelector("#errMsg2");
     const errMsg3 = document.querySelector("#errMsg3");
@@ -193,29 +196,30 @@ addBtn.onclick = function() {
         errMsg1.innerHTML = "This field cannot be blank, must be 8 chars long and can be alpha numeric";
         name.style.borderColor = "red";
         errMsg1.style.color = "red";
-
-
+        checkValid = false;
+        name.focus();
     } else {
         errMsg1.innerHTML = "Looks Good";
         errMsg1.style.color = "green";
         name.style.border = "none";
-        name.focus();
-        checkValid = true;
+        //name.focus();
+        //checkValid = true;
     }
     if (description.value == "" || description.value.length < 15 || !isNaN(description.value)) {
 
         errMsg2.innerHTML = "This field cannot be blank and must be 15 chars long";
         description.style.borderColor = "red";
         errMsg2.style.color = "red";
-
-
-    } else {
+        checkValid = false;
+        description.focus();
+    }
+     else {
 
         errMsg2.innerHTML = "Looks good";
         description.style.border = "none";
         errMsg2.style.color = "green";
-        description.focus();
-        checkValid = true;
+        
+        
 
     }
     if (assignee.value == "" || assignee.value.length < 8 || !isNaN(assignee.value)) {
@@ -223,18 +227,17 @@ addBtn.onclick = function() {
         errMsg3.innerHTML = "This field cannot be blank and must be 8 chars long";
         assignee.style.borderColor = "red";
         errMsg3.style.color = "red";
-
+        assignee.focus();
 
     } else {
         errMsg3.innerHTML = "Looks Good";
         errMsg3.style.color = "green";
         assignee.style.border = "none";
-        assignee.focus();
-        checkValid = true;
-
+        
     }
-    if (checkValid == true) {
+    if (checkValid) {
         //const taskContainer = document.querySelector('#tasksummary');
+        addBtn.focus();
         taskManager.addTask(name.value, description.value, assignee.value, date.value, status.value);
         taskManager.display();
 
@@ -244,7 +247,7 @@ addBtn.onclick = function() {
         //taskManager.addTaskToPage(task);
         //document.forms["#task-form"].reset();
         document.querySelector("#task-form").reset();
-        document.getElementsByClassName(".spanclass").innerHTML = "";
+        document.getElementsByClassName(".spanclass").hide();
         $("#addModal").modal("hide");
     } else {
         return false;
