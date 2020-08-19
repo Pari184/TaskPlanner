@@ -15,26 +15,17 @@
 
     <div class="container-fluid mt-100">
         <h1 class="text-center">Task Planner</h1>
-        <!-- <div class="d-inline-flex flex-wrap justify-content-between">
-            <a type="button" class="btn btn-shadow btn-wide btn-primary" href="#collapseExample1" data-toggle="modal" data-target="#addModal"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New Task </a>
-
-            <input class="btn btn-shadow btn-wide btn-primary" type="text" class="form-control" placeholder="Search...">
-
-
-        </div> -->
         <div class="mt-5">
             <button class="btn btn-wide btn-primary" data-toggle="modal" data-target="#addModal"> New Task </button>
-
             <select id="searchByStatus" name="status" class="col-sm-6">
                 <option value="inprogress" selected>Select by Status</option>
                 <option value="inprogress">In Progress</option>
                 <option value="invalid">To-do</option>
                 <option value="completed">Completed</option>
             </select>
-
-
         </div>
-        <div class="card mb-3" id="tasksummary">
+        <br>
+        <div id="tasksummary">
             <!-- <div class="card-header pl-0 pr-0">
                 <div class="row no-gutters w-100 align-items-center">
                     <div class="col ml-3">Tasks</div>
@@ -150,7 +141,7 @@
                             <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="editTaskName">
-                                <span id="errMsg1"></span>
+                                <span id="errMsg6"></span>
                             </div>
                         </div>
 
@@ -158,7 +149,7 @@
                             <label class="col-sm-3 col-form-label" for="taskdescription">Description</label>
                             <div class="col-sm-9">
                                 <input type="textarea" class="form-control" id="editTextDescription">
-                                <span id="errMsg2"></span>
+                                <span id="errMsg7"></span>
                             </div>
                         </div>
 
@@ -166,7 +157,7 @@
                             <label class="col-sm-3 col-form-label" for="assignedto">Assigned To</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="editAssignedTo">
-                                <span id="errMsg3"></span>
+                                <span id="errMsg8"></span>
                             </div>
                         </div>
 
@@ -178,7 +169,7 @@
 
                                 <input type="date" class="form-control" id="editDueDate" max="2021-12-31" min="2020-08-05" required>
 
-                                <span id="errMsg4"></span>
+                                <span id="errMsg9"></span>
                             </div>
                         </div>
                         <div class="form-group row">

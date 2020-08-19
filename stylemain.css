@@ -4,9 +4,9 @@ body {
     font-size: .88rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+    color: black;
     text-align: left;
-    background-color: rgb(243, 222, 221);
+    background-color: white;
 }
 
 .mt-100 {
@@ -15,21 +15,23 @@ body {
 
 .btn.btn-wide {
     padding: .375rem 1.5rem;
-    font-size: .8rem;
+    font-size: 1.0rem;
     line-height: 1.5;
-    border-radius: .25rem
+    border-radius: 10rem;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #3f6ad8;
-    border-color: #3f6ad8
+    background-color: rgb(52, 126, 18);
+    border-color: rgb(52, 126, 18);
 }
 
-#navbarNav {
-    background-color: rgb(149, 211, 248);
-    width: 100%;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: rgb(52, 126, 18);
+    border-color: rgb(52, 126, 18); /*set the color you want here*/
 }
+
 
 h1 {
     text-align: center;
@@ -45,16 +47,22 @@ h1 {
     float: right;
     width: 180px;
     margin-right: 20px;
+    border-radius: 10rem;
+    background-color: rgb(52, 126, 18);
 }
 
+
 .modal-header {
-    background-color: rgb(149, 211, 248);
+    background-color:  rgb(52, 126, 18);
+    border-radius: 2rem;
 }
 
 .modal-body {
-    background-color: rgb(243, 222, 221);
+    background-color: white;
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
 }
 
 .modal-footer {
-    background-color: rgb(243, 222, 221);
+    background-color: white;
 }
