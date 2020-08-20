@@ -1,114 +1,15 @@
+import Task from "./task.js";
+import TaskManager from "./taskmanager.js";
+
 // Class for creating task
 var checkValidName = false; //global variable
 var checkValidDesc = false; //global variable
 var checkValidAssignee = false;
 var checkValidStatus = false;
 var checkValidDate = false;
-class Task {
-    constructor(id, name, description, assignee, date, status) {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.assignee = assignee;
-            this.date = date;
-            this.status = status;
-            this.isDelete = false;
-        }
-        // Function to set the HTML code for all task
-    toHTMLString() {
-            const HTML = `
-        <div class="card-body py-3">
-        <div class="row no-gutters align-items-center" id="taskEdit">
-            <div class="col"> <p class="text-big"   id="${this.id}" data-abc="true">${this.name}</p>
-            <p class="text-big">${this.description}-${this.assignee}-${this.date}-${this.status}</p>
-            </div>
-            <div class="col-3 text-muted">               
-                <button class="edit btn btn-primary ml-2"><i class="icon-edit" style="font-size:36px;color:blue"></i></i></button>
-                <button class="delete btn btn-danger"><i class="fas fa-trash-alt" style="font-size:36px;color:red"></i></i></button>               
-            </div>
-        </div>
-        </div>
-        <hr class="m-0">
-    `;
-    return HTML;
-    }
-    // Function to create HTML elements for task
-    toHtmlElement() {
-        const html = this.toHTMLString();
-        const element = document.createRange().createContextualFragment(html);
-        element
-            .querySelector("button.edit")
-            .addEventListener("click", editTaskClicked);
-        element
-            .querySelector("button.delete")
-            .addEventListener("click", deleteTaskClicked);
-        return element;
-    }
-}
+
 
 // Class for managing and accessing the task
-class TaskManager {
-    constructor(parent) {
-            this.tasks = [];
-            this.currentId = 1;
-            this.parent = parent;
-        }
-        // Function to add a task after successful validation and push the task to tasks array.
-    addTask(name, description, assignee, date, status) {
-        const task = new Task(`task${this.currentId++}`, name, description, assignee, date, status);
-        this.tasks.push(task);
-    }
-    // Function to update the task with new edited values after successful validation.
-    updateTask(id, name, description, assignee, date, status) {
-        for (let i = 0; i < this.tasks.length; i++) {
-            if (this.tasks[i].id == id) {
-                this.tasks[i].name = name;
-                this.tasks[i].description = description;
-                this.tasks[i].assignee = assignee;
-                this.tasks[i].date = date;
-                this.tasks[i].status = status;
-                this.display();
-                //break;
-            }
-        }
-
-    }
-    // Function for deleting a task whose id is passed.
-    deleteTask(id) {
-            this.tasks = this.tasks.filter(
-                (t) => t.id !== id);
-            //this.display();
-
-
-
-        }
-    // To display all the tasks from "tasks" array.
-    display() {
-        this.parent.innerHTML = "";
-        var cardheading = `<div class="card mb-3" id="tasksummary">
-        <div class="card-header pl-0 pr-0">
-            <div class="row no-gutters w-100 align-items-center">
-                <div class="col ml-3">Tasks</div>
-                <div class="col-3 text-muted">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col">Edit/Delete</div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
-        if (this.tasks.length < 1) {
-            cardheading = "";
-        } else {
-            const helement = document.createRange().createContextualFragment(cardheading);
-            this.parent.append(helement);
-            this.tasks.forEach((task) => {
-                const taskElement = task.toHtmlElement();
-                this.parent.append(taskElement);
-            });
-        }
-
-    }
-}
 
 
 /* code for card heading 
@@ -137,7 +38,8 @@ function validation(){
 
 
 const taskContainer = document.querySelector('#tasksummary');
-const taskManager = new TaskManager(taskContainer);
+const taskManager = new TaskManager(taskContainer, editTaskClicked, deleteTaskClicked);
+
 
 //const editbtn;
 //const taskContainer = document.querySelector('#tasks');
@@ -164,11 +66,11 @@ addBtn.onclick = function() {
     const date = document.querySelector("#dueDate");
     const status = document.querySelector("#taskStatus");
     
-    const mode = "ADD";
-    validateFormElements(name,description,assignee,date,mode);
-    if (checkValidName && checkValidDesc && checkValidAssignee ) {
-        //const taskContainer = document.querySelector('#tasksummary');
-        addBtn.focus();
+    // const mode = "ADD";
+    // validateFormElements(name,description,assignee,date,mode);
+    // if (checkValidName && checkValidDesc && checkValidAssignee ) {
+    //     //const taskContainer = document.querySelector('#tasksummary');
+    //     addBtn.focus();
         taskManager.addTask(name.value, description.value, assignee.value, date.value, status.value);
         taskManager.display();
         //taskContainer.append(element);
@@ -180,7 +82,7 @@ addBtn.onclick = function() {
         //document.getElementsByClassName(".spanclass").hide();
         resetValidationMessages();
         $("#addModal").modal("hide");
-    } 
+//    } 
     // else {
     //     return false;
     // }
@@ -233,19 +135,19 @@ function validateFormElements(name,description,assignee,dueDate,mode){
         assignee.style.border = "none";
         checkValidAssignee = true;
     }
-    var currentDate = new Date();
-    dueDateValue = new Date(dueDate.value);
-    if (dueDateValue.value == undefined || dueDateValue < currentDate){
-        setErrorMessage("The date is lesser than current date",errMsg4);
-        dueDate.style.borderColor = "red";
-        dueDate.focus();
-        checkValidDate = false;
-    }
-    else{
-        setValidationSuccessMessage(errMsg4);
-        dueDate.style.border = "none";
-        checkValidDate = true;
-    }
+    // var currentDate = new Date();
+    // dueDateValue = new Date(dueDate.value);
+    // if (dueDateValue.value == undefined || dueDateValue < currentDate){
+    //     setErrorMessage("The date is lesser than current date",errMsg4);
+    //     dueDate.style.borderColor = "red";
+    //     dueDate.focus();
+    //     checkValidDate = false;
+    // }
+    // else{
+    //     setValidationSuccessMessage(errMsg4);
+    //     dueDate.style.border = "none";
+    //     checkValidDate = true;
+    // }
         
 
 }
