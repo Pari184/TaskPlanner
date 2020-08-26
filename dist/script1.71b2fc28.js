@@ -214,8 +214,8 @@ var TaskManager = /*#__PURE__*/function () {
           this.tasks[i].description = description;
           this.tasks[i].assignee = assignee;
           this.tasks[i].date = date;
-          this.tasks[i].status = status;
-          this.display(); //break;
+          this.tasks[i].status = status; //this.display();
+          //break;
         }
       }
     } // Function for deleting a task whose id is passed.
@@ -508,7 +508,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54654" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49833" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
