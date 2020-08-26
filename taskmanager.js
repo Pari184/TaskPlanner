@@ -23,7 +23,7 @@ export default class TaskManager {
                 this.tasks[i].assignee = assignee;
                 this.tasks[i].date = date;
                 this.tasks[i].status = status;
-                this.display();
+                //this.display();
                 //break;
             }
         }
