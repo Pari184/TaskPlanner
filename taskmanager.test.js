@@ -1,4 +1,15 @@
 import TaskManager from "./taskmanager.js";
+//import displayAllTasksFromStorage from "./display.js";
+
+import path from "path";
+import fs from "fs";
+const html = fs.readFileSync(path.resolve(__dirname, "./index.html"), "utf8");
+
+
+beforeEach(() =>{ //sets up the DOM
+    //localStorage.clear();
+    document.documentElement.innerHTML = html.toString();
+});
 
 //Test update task
 test("Task Updation", () => {
@@ -26,4 +37,14 @@ test("Task Updation", () => {
     //Verify the task is deleted and check the tasks array length
     expect(taskmanager.tasks.length).toBe(0);
     
+});
+
+test("HTML element added to page ", () => {
+    let cardrow = document.querySelector("#tasksummary"); //Select the parent element
+    const tm = new TaskManager(cardrow);
+    tm.addTask("Task 3", "To pick kids Kumon worksheets", "Anuradha", "26-08-2020", "Todo");
+    expect(tm.tasks.length).toBe(1);
+    tm.display();
+    console.log(cardrow.innerHTML);
+    expect(cardrow.children.length).toBe(3);
 });

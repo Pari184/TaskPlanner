@@ -18,9 +18,9 @@ export default class Task {
             <div class="col"> <p class="text-big"   id="${this.id}" data-abc="true">${this.name}</p>
             <p class="text-big">${this.description}-${this.assignee}-${this.date}-${this.status}</p>
             </div>
-            <div class="col-3 text-muted">               
-                <button class="edit btn btn-primary ml-2"><i class="icon-edit" style="font-size:36px;color:blue"></i></i></button>
-                <button class="delete btn btn-danger"><i class="fas fa-trash-alt" style="font-size:36px;color:red"></i></i></button>               
+            <div class="col-3 text-muted">           
+                <button class="edit btn btn-primary ml-2"><i class="far fa-edit"></i></i></button>
+                <button class="delete btn btn-danger"><i class="far fa-trash-alt"></i></i></button>               
             </div>
         </div>
         </div>

@@ -43,11 +43,11 @@ const tdate = document.getElementById("editDueDate");
 const tstatus = document.getElementById("editTaskStatus");
 
 //Variables for edit task corresponding error fileds
-const errMsg1 = document.querySelector("#errMsg6");
-const errMsg2 = document.querySelector("#errMsg7");
-const errMsg3 = document.querySelector("#errMsg8");
-const errMsg4 = document.querySelector("#errMsg9");
-const mode = "Edit";
+// const errMsg1 = document.querySelector("#errMsg6");
+// const errMsg2 = document.querySelector("#errMsg7");
+// const errMsg3 = document.querySelector("#errMsg8");
+// const errMsg4 = document.querySelector("#errMsg9");
+// const mode = "Edit";
 
 
 //Function onclick of "Add Task" button
