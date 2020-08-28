@@ -149,7 +149,7 @@ var Task = /*#__PURE__*/function () {
   _createClass(Task, [{
     key: "toHTMLString",
     value: function toHTMLString() {
-      var HTML = "\n        <div class=\"card-body py-3\">\n        <div class=\"row no-gutters align-items-center\" id=\"taskEdit\">\n            <div class=\"col\"> <p class=\"text-big\"   id=\"".concat(this.id, "\" data-abc=\"true\">").concat(this.name, "</p>\n            <p class=\"text-big\">").concat(this.description, "-").concat(this.assignee, "-").concat(this.date, "-").concat(this.status, "</p>\n            </div>\n            <div class=\"col-3 text-muted\">               \n                <button class=\"edit btn btn-primary ml-2\"><i class=\"icon-edit\" style=\"font-size:36px;color:blue\"></i></i></button>\n                <button class=\"delete btn btn-danger\"><i class=\"fas fa-trash-alt\" style=\"font-size:36px;color:red\"></i></i></button>               \n            </div>\n        </div>\n        </div>\n        <hr class=\"m-0\">\n    ");
+      var HTML = "\n        <div class=\"card-body py-3\">\n        <div class=\"row no-gutters align-items-center\" id=\"taskEdit\">\n            <div class=\"col\"> <p class=\"text-big\"   id=\"".concat(this.id, "\" data-abc=\"true\">").concat(this.name, "</p>\n            <p class=\"text-big\">").concat(this.description, "-").concat(this.assignee, "-").concat(this.date, "-").concat(this.status, "</p>\n            </div>\n            <div class=\"col-3 text-muted\">           \n                <button class=\"edit btn btn-primary ml-2\"><i class=\"far fa-edit\"></i></i></button>\n                <button class=\"delete btn btn-danger\"><i class=\"far fa-trash-alt\"></i></i></button>               \n            </div>\n        </div>\n        </div>\n        <hr class=\"m-0\">\n    ");
       return HTML;
     } // Function to create HTML elements for task
 
@@ -257,12 +257,11 @@ exports.default = TaskManager;
 },{"./task.js":"task.js"}],"script1.js":[function(require,module,exports) {
 "use strict";
 
-var _task = _interopRequireDefault(require("./task.js"));
-
 var _taskmanager = _interopRequireDefault(require("./taskmanager.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import Task from "./task.js";
 // Class for creating task
 var checkValidName = false; //global variable
 
@@ -270,174 +269,194 @@ var checkValidDesc = false; //global variable
 
 var checkValidAssignee = false;
 var checkValidStatus = false;
-var checkValidDate = false; // Class for managing and accessing the task
+var checkValidDate = false; //div in html to append new tasks.
 
-/* code for card heading 
-        <div class="card mb-3">
-            <div class="card-header pl-0 pr-0">
-                <div class="row no-gutters w-100 align-items-center">
-                    <div class="col ml-3">Tasks</div>
-                    <div class="col-4 text-muted">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col">Edit/Delete</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-*/
+var taskContainer = document.querySelector('#tasksummary'); //Instance of TaskManager class
 
-/*const taskContainer = document.querySelector(".addModal");
-
-const createTask = document.querySelector("#addTask");
-createTask.addEventListener("click", validation);
-
-function validation(){
-    const taskname = document.querySelector("#")
-    //validation for all fields
-}*/
-
-var taskContainer = document.querySelector('#tasksummary');
-var taskManager = new _taskmanager.default(taskContainer, editTaskClicked, deleteTaskClicked); //const editbtn;
-//const taskContainer = document.querySelector('#tasks');
-//const createButton = document.querySelector('.addTask');
-//createButton.addEventListener("click", createTaskClicked);
+var taskManager = new _taskmanager.default(taskContainer, editTaskClicked, deleteTaskClicked); //Variable for add task form in html
 
 var taskForm = document.querySelector('#task-form');
-var taskIdInput = document.querySelector('#task-id'); //taskForm.addEventListener("addTask", taskFormSubmitted);
-//const modalElement = document.querySelector('#addModal');
+var edttask = document.querySelector("#editTask"); //Variables for add task fields
 
 var addBtn = document.querySelector("#addTask");
-var edttask = document.querySelector("#editTask");
+var name = document.querySelector("#taskName");
+var description = document.querySelector("#textDescription");
+var assignee = document.querySelector("#assignedTo");
+var date = document.querySelector("#dueDate");
+var status = document.querySelector("#taskStatus"); //Variables for add task corresponding error fileds
+
+var errMsg1 = document.querySelector("#errMsg1");
+var errMsg2 = document.querySelector("#errMsg2");
+var errMsg3 = document.querySelector("#errMsg3");
+var errMsg4 = document.querySelector("#errMsg4");
+var errMsg5 = document.querySelector("#errMsg5"); //Variables for edit task fields
+
+var tid = document.getElementById("editTaskID");
+var tname = document.getElementById("editTaskName");
+var tdesc = document.getElementById("editTextDescription");
+var tassignee = document.getElementById("editAssignedTo");
+var tdate = document.getElementById("editDueDate");
+var tstatus = document.getElementById("editTaskStatus"); //Variables for edit task corresponding error fileds
+// const errMsg1 = document.querySelector("#errMsg6");
+// const errMsg2 = document.querySelector("#errMsg7");
+// const errMsg3 = document.querySelector("#errMsg8");
+// const errMsg4 = document.querySelector("#errMsg9");
+// const mode = "Edit";
+//Function onclick of "Add Task" button
 
 addBtn.onclick = function () {
-  var name = document.querySelector("#taskName");
-  var description = document.querySelector("#textDescription");
-  var assignee = document.querySelector("#assignedTo");
-  var date = document.querySelector("#dueDate");
-  var status = document.querySelector("#taskStatus"); // const mode = "ADD";
-  // validateFormElements(name,description,assignee,date,mode);
-  // if (checkValidName && checkValidDesc && checkValidAssignee ) {
-  //     //const taskContainer = document.querySelector('#tasksummary');
-  //     addBtn.focus();
-
+  //Calling addTask function in TaskManager class after successful validation by passing values  
   taskManager.addTask(name.value, description.value, assignee.value, date.value, status.value);
-  taskManager.display(); //taskContainer.append(element);
-  //const element = newta.toHTMLString();
-  //taskContainer.innerHTML = "";
-  //taskManager.addTaskToPage(task);
-  //document.forms["#task-form"].reset();
+  taskManager.display(); //Resetting the add task form fields.
 
-  document.querySelector("#task-form").reset(); //document.getElementsByClassName(".spanclass").hide();
+  taskForm.reset(); //Reset validation messages
 
-  resetValidationMessages();
-  $("#addModal").modal("hide"); //    } 
-  // else {
-  //     return false;
-  // }
-};
+  clearErrorFields(); //Hiding of the modal after adding task
 
-function validateFormElements(name, description, assignee, dueDate, mode) {
-  var errMsg1 = "";
-  var errMsg2 = "";
-  var errMsg3 = "";
-  var errMsg4 = "";
+  $("#addModal").modal("hide");
+}; // Validation if individual fields are not complete
 
-  if (mode == "ADD") {
-    errMsg1 = "#errMsg1";
-    errMsg2 = "#errMsg2";
-    errMsg3 = "#errMsg3";
-    errMsg4 = "#errMsg4";
-  } else {
-    errMsg1 = "#errMsg6";
-    errMsg2 = "#errMsg7";
-    errMsg3 = "#errMsg8";
-    errMsg4 = "#errMsg9";
-  }
 
-  if (name.value == "" || name.value.length < 8) {
-    setErrorMessage("This field cannot be blank, must be 8 chars long and can be alpha numeric", errMsg1);
-    name.style.borderColor = "red";
+name.addEventListener("input", function (event) {
+  if (event.target.value && event.target.value.length <= 8) {
+    errMsg1.innerHTML = "Task name should be longer than 8 characters";
+    errMsg1.style.color = "red";
     name.focus();
     checkValidName = false;
   } else {
-    setValidationSuccessMessage(errMsg1);
-    name.style.border = "none";
+    errMsg1.innerHTML = "Looks Good!";
+    errMsg1.style.color = "green";
     checkValidName = true;
   }
-
-  if (description.value == "" || description.value.length < 15) {
-    setErrorMessage("This field cannot be blank and must be 15 chars long", errMsg2);
-    description.style.borderColor = "red";
+});
+description.addEventListener("input", function (event) {
+  if (event.target.value && event.target.value.length <= 8) {
+    //errMsg1.innerHTML = "";
+    errMsg2.innerHTML = "Task description should be longer than 15 characters";
+    errMsg2.style.color = "red";
     description.focus();
     checkValidDesc = false;
   } else {
-    setValidationSuccessMessage(errMsg2);
-    description.style.border = "none";
+    errMsg2.innerHTML = "Looks Good!";
+    errMsg2.style.color = "green";
     checkValidDesc = true;
   }
-
-  if (assignee.value == "" || assignee.value.length < 8) {
-    setErrorMessage("This field cannot be blank and must be 8 chars long", errMsg3);
-    assignee.style.borderColor = "red";
+});
+assignee.addEventListener("input", function (event) {
+  if (event.target.value && event.target.value.length <= 8) {
+    //errMsg1.innerHTML = "";
+    errMsg3.innerHTML = "Assignee name should be longer than 8 characters";
+    errMsg3.style.color = "red";
     assignee.focus();
     checkValidAssignee = false;
   } else {
-    setValidationSuccessMessage(errMsg3);
-    assignee.style.border = "none";
+    errMsg3.innerHTML = "Looks Good!";
+    errMsg3.style.color = "green";
     checkValidAssignee = true;
-  } // var currentDate = new Date();
-  // dueDateValue = new Date(dueDate.value);
-  // if (dueDateValue.value == undefined || dueDateValue < currentDate){
-  //     setErrorMessage("The date is lesser than current date",errMsg4);
-  //     dueDate.style.borderColor = "red";
-  //     dueDate.focus();
-  //     checkValidDate = false;
-  // }
-  // else{
-  //     setValidationSuccessMessage(errMsg4);
-  //     dueDate.style.border = "none";
-  //     checkValidDate = true;
-  // }
+  }
+});
+date.addEventListener("change", function (event) {
+  if (event.target.value == 0) {
+    //errMsg1.innerHTML = "";
+    errMsg4.innerHTML = "Please select a valid date.";
+    errMsg4.style.color = "red";
+    date.focus();
+    checkValidDate = false;
+  } else {
+    errMsg4.innerHTML = "Looks Good!";
+    errMsg4.style.color = "green";
+    checkValidDate = true;
+  }
+});
+status.addEventListener("change", function (event) {
+  if (event.target.value === "Please Choose") {
+    //errMsg1.innerHTML = "";
+    errMsg5.innerHTML = "Please select a valid status.";
+    errMsg5.style.color = "red";
+    status.focus();
+    checkValidStatus = false;
+  } else {
+    errMsg5.innerHTML = "Looks Good!";
+    errMsg5.style.color = "green";
+    checkValidStatus = true;
+  }
+}); // Clear all error message labels
+
+function clearErrorFields() {
+  errMsg1.innerHTML = "";
+  errMsg2.innerHTML = "";
+  errMsg3.innerHTML = "";
+  errMsg4.innerHTML = "";
+  errMsg5.innerHTML = "";
+}
+/*function validateFormElements(name,description,assignee,dueDate,mode){
+    var errMsg1 = "";
+    var errMsg2 = "";
+    var errMsg3 = "";
+    var errMsg4 = "";
+    if(mode == "ADD"){
+       errMsg1 =  "#errMsg1";
+       errMsg2 = "#errMsg2";
+       errMsg3 = "#errMsg3";
+       errMsg4 = "#errMsg4";
+    }
+    else{
+        errMsg1 =  "#errMsg6";
+       errMsg2 = "#errMsg7";
+       errMsg3 = "#errMsg8";
+       errMsg4 = "#errMsg9";
+    }
+    if (name.value == "" || name.value.length < 8 ) {
+        setErrorMessage("This field cannot be blank, must be 8 chars long and can be alpha numeric",errMsg1);
+        name.style.borderColor = "red";
+        name.focus();
+        checkValidName=false;
+    } else {
+        setValidationSuccessMessage(errMsg1);
+        name.style.border = "none";
+        checkValidName = true;
+    }
+    if (description.value == "" || description.value.length < 15 ) {
+        setErrorMessage("This field cannot be blank and must be 15 chars long",errMsg2);
+        description.style.borderColor = "red";
+        description.focus();
+        checkValidDesc=false;
+    }       else {
+        setValidationSuccessMessage(errMsg2);
+        description.style.border = "none";
+        checkValidDesc=true;
+    }
+    if (assignee.value == "" || assignee.value.length < 8) {
+        setErrorMessage("This field cannot be blank and must be 8 chars long",errMsg3);
+        assignee.style.borderColor = "red";
+        assignee.focus();
+        checkValidAssignee = false;
+    } else {
+        setValidationSuccessMessage(errMsg3);
+        assignee.style.border = "none";
+        checkValidAssignee = true;
+    }
+    // var currentDate = new Date();
+    // dueDateValue = new Date(dueDate.value);
+    // if (dueDateValue.value == undefined || dueDateValue < currentDate){
+    //     setErrorMessage("The date is lesser than current date",errMsg4);
+    //     dueDate.style.borderColor = "red";
+    //     dueDate.focus();
+    //     checkValidDate = false;
+    // }
+    // else{
+    //     setValidationSuccessMessage(errMsg4);
+    //     dueDate.style.border = "none";
+    //     checkValidDate = true;
+    // }
+        
 
 }
 
-function setErrorMessage(errorDesc, errorElement) {
-  var errMsg = document.querySelector(errorElement);
-  errMsg.innerHTML = errorDesc;
-  errMsg.style.color = "red";
-}
+*/
 
-function setValidationSuccessMessage(errorElement) {
-  var errMsg = document.querySelector(errorElement);
-  errMsg.innerHTML = "Looks Good";
-  errMsg.style.color = "green";
-}
-
-function resetValidationMessages() {
-  $("#errMsg1").innerHTML = "";
-  $("#errMsg2").innerHTML = "";
-  $("#errMsg3").innerHTML = "";
-  $("#errMsg4").innerHTML = "";
-  $("#errMsg6").innerHTML = "";
-  $("#errMsg7").innerHTML = "";
-  $("#errMsg8").innerHTML = "";
-  $("#errMsg9").innerHTML = "";
-}
-
-;
 
 edttask.onclick = function () {
-  var tid = document.getElementById("editTaskID");
-  var tname = document.getElementById("editTaskName");
-  var tdesc = document.getElementById("editTextDescription");
-  var tassignee = document.getElementById("editAssignedTo");
-  var tdate = document.getElementById("editDueDate");
-  var tstatus = document.getElementById("editTaskStatus");
-  var errMsg1 = document.querySelector("#errMsg6");
-  var errMsg2 = document.querySelector("#errMsg7");
-  var errMsg3 = document.querySelector("#errMsg8");
-  var errMsg4 = document.querySelector("#errMsg9");
-  var mode = "Edit";
   validateFormElements(tname, tdesc, tassignee, tdate, mode); //later call the validation function.
 
   if (checkValidName && checkValidDesc && checkValidAssignee && checkValidDate) {
@@ -475,12 +494,7 @@ function deleteTaskClicked(event) {
   taskManager.deleteTask(taskID);
   taskManager.display();
 }
-
-function addTaskToPage(task) {
-  var element = task.toHtmlElement();
-  taskContainer.append(element);
-}
-},{"./task.js":"task.js","./taskmanager.js":"taskmanager.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./taskmanager.js":"taskmanager.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -508,7 +522,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49833" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53943" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

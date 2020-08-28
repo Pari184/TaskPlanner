@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylemain.3873c837.css">
     <title>Task Planner</title>
 <script src="/stylemain.3873c837.js"></script></head>
@@ -69,7 +70,7 @@
                             <label class="col-sm-3 col-form-label" for="taskname">Task Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="taskName">
-                                <span id="errMsg1" class="spanclass"></span>
+                                <span id="errMsg1" class="validMessage"></span>
                             </div>
                         </div>
 
@@ -92,11 +93,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label" for="duedate">Due Date</label>
                             <div class="col-sm-9">
-
-
-
                                 <input type="date" class="form-control" id="dueDate" max="2021-12-31" min="2020-08-05" required="">
-
                                 <span id="errMsg4" class="spanclass"></span>
                             </div>
                         </div>
@@ -104,11 +101,12 @@
                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                             <div class="col-sm-6">
                                 <select id="taskStatus" name="status" class="col-sm-6">
-                                         <option value="inprogress" selected="">In Progress</option>
+                                        <option value="Please choose">Please Choose</option>
+                                         <option value="inprogress">In Progress</option>
                                          <option value="invalid">To-do</option>
                                          <option value="completed">Completed</option>
-                                     </select>
-                                <span id="errMsg5" class="spanclass"></span>
+                                </select> 
+                                <span id="errMsg5" class="spanclass"></span>                               
                             </div>
                         </div>
                     </div>
@@ -188,7 +186,7 @@
                 <div class="modal-footer">
                     <div class="modal-footer-group">
                         <button class="btn btn-danger mr-2" type="button" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-success mr-2" type="submit" id="editTask">Edit Task</button>
+                        <button class="btn btn-success mr-2" type="submit" id="editTask">Update Task</button>
                     </div>
                 </div>
             </div>

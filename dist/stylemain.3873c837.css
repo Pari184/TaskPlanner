@@ -47,14 +47,13 @@ h1 {
     float: right;
     width: 180px;
     margin-right: 20px;
-    border-radius: 10rem;
+    border-radius: 2rem;
     background-color: rgb(52, 126, 18);
 }
 
 
 .modal-header {
     background-color:  rgb(52, 126, 18);
-    border-radius: 2rem;
 }
 
 .modal-body {
