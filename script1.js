@@ -243,7 +243,24 @@ function deleteTaskClicked(event) {
     taskManager.display();
 }
 
+//let statusCheck = document.querySelector("button.dropdown-item").addEventListener("click", byStatus);
+const statusInprogress = document.querySelector("#inprogress"); // assign Done button to counterDone variable
+statusInprogress.addEventListener("click", byStatus);
+
+const statusTodo = document.querySelector("#todo"); // assign Done button to counterDone variable
+statusTodo.addEventListener("click", byStatus);
+
+const statusReview = document.querySelector("#review"); // assign Done button to counterDone variable
+statusReview.addEventListener("click", byStatus);
+
+const statusDone = document.querySelector("#done"); // assign Done button to counterDone variable
+statusDone.addEventListener("click", byStatus);
+
+const statusAll = document.querySelector("#allTask"); // assign Done button to counterDone variable
+statusAll.addEventListener("click", byStatus);
 
 function byStatus(event){
-
+ var selectedStatus = event.target.value;
+ console.log(selectedStatus);
+ taskManager.displayStatus(selectedStatus);
 }
