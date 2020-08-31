@@ -74,8 +74,10 @@ test("HTML element removed from page after deleting the task ", () => {
     let cardrow = document.querySelector("#tasksummary");
     //Instance of TaskManager class
     const tm = new TaskManager(cardrow);
+    //Add the task
+    tm.addTask("Task 3", "To pick kids Kumon worksheets", "Anuradha", "26-08-2020", "Todo");
     //Delete the task
-    tm.deleteTask("task3");
+    tm.deleteTask("task1");
     tm.display();
     //Verify the number of children after deleting the task
     expect(cardrow.children.length).toBe(0);
