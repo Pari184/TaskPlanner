@@ -203,6 +203,16 @@ var TaskManager = /*#__PURE__*/function () {
     value: function addTask(name, description, assignee, date, status) {
       var task = new _task.default("task".concat(this.currentId++), name, description, assignee, date, status);
       this.tasks.push(task);
+      this.toAddToLocalStorage(task);
+    } //Adding task to Local Storage
+
+  }, {
+    key: "toAddToLocalStorage",
+    value: function toAddToLocalStorage(task) {
+      localStorage.setItem('currentId', this.currentId);
+      var myNewTasks = JSON.parse(localStorage.getItem("myTask")) || [];
+      myNewTasks.push(task);
+      localStorage.setItem('myTask', JSON.stringify(myNewTasks));
     } // Function to update the task with new edited values after successful validation.
 
   }, {
@@ -216,6 +226,25 @@ var TaskManager = /*#__PURE__*/function () {
           this.tasks[i].date = date;
           this.tasks[i].status = status; //this.display();
           //break;
+
+          this.toUpdateInLocalStorage(id, name, description, assignee, date, status);
+        }
+      }
+    } //Update in Local Storage
+
+  }, {
+    key: "toUpdateInLocalStorage",
+    value: function toUpdateInLocalStorage(id, name, description, assignee, date, status) {
+      var myNewTask = JSON.parse(localStorage.getItem('myTask'));
+
+      for (var i = 0; i < myNewTask.length; i++) {
+        if (myNewTask[i].id == id) {
+          myNewTask[i].name = name;
+          myNewTask[i].description = description;
+          myNewTask[i].assignee = assignee;
+          myNewTask[i].date = date;
+          myNewTask[i].status = status;
+          localStorage.setItem('myTask', JSON.stringify(myNewTask));
         }
       }
     } // Function for deleting a task whose id is passed.
@@ -226,6 +255,18 @@ var TaskManager = /*#__PURE__*/function () {
       this.tasks = this.tasks.filter(function (t) {
         return t.id !== id;
       }); //this.display();
+
+      this.toDeleteFromLocalStorage(id); //this.display();
+    } //Remove task from local storage
+
+  }, {
+    key: "toDeleteFromLocalStorage",
+    value: function toDeleteFromLocalStorage(id) {
+      var myNewTask = JSON.parse(localStorage.getItem('myTask'));
+      myNewTask = myNewTask.filter(function (t) {
+        return t.id !== id;
+      });
+      localStorage.setItem('myTask', JSON.stringify(myNewTask));
     } // To display all the tasks from "tasks" array.
 
   }, {
@@ -262,13 +303,9 @@ var _taskmanager = _interopRequireDefault(require("./taskmanager.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //import Task from "./task.js";
-// Class for creating task
-var checkValidName = false; //global variable
-
-var checkValidDesc = false; //global variable
-
-var checkValidAssignee = false;
+//variables for status and date fields check
 var checkValidStatus = false;
+var taskID = "";
 var checkValidDate = false; //div in html to append new tasks.
 
 var taskContainer = document.querySelector('#tasksummary'); //Instance of TaskManager class
@@ -282,203 +319,169 @@ var addBtn = document.querySelector("#addTask");
 var name = document.querySelector("#taskName");
 var description = document.querySelector("#textDescription");
 var assignee = document.querySelector("#assignedTo");
-var date = document.querySelector("#dueDate");
-var status = document.querySelector("#taskStatus"); //Variables for add task corresponding error fileds
-
-var errMsg1 = document.querySelector("#errMsg1");
-var errMsg2 = document.querySelector("#errMsg2");
-var errMsg3 = document.querySelector("#errMsg3");
-var errMsg4 = document.querySelector("#errMsg4");
-var errMsg5 = document.querySelector("#errMsg5"); //Variables for edit task fields
+var dueDate = document.querySelector("#dueDate");
+var status = document.querySelector("#taskStatus"); //Variables for edit task fields
 
 var tid = document.getElementById("editTaskID");
 var tname = document.getElementById("editTaskName");
 var tdesc = document.getElementById("editTextDescription");
 var tassignee = document.getElementById("editAssignedTo");
 var tdate = document.getElementById("editDueDate");
-var tstatus = document.getElementById("editTaskStatus"); //Variables for edit task corresponding error fileds
-// const errMsg1 = document.querySelector("#errMsg6");
-// const errMsg2 = document.querySelector("#errMsg7");
-// const errMsg3 = document.querySelector("#errMsg8");
-// const errMsg4 = document.querySelector("#errMsg9");
-// const mode = "Edit";
-//Function onclick of "Add Task" button
+var tstatus = document.getElementById("editTaskStatus"); //Function onclick of "Add Task" button
 
 addBtn.onclick = function () {
   //Calling addTask function in TaskManager class after successful validation by passing values  
-  taskManager.addTask(name.value, description.value, assignee.value, date.value, status.value);
-  taskManager.display(); //Resetting the add task form fields.
+  validateDateElement(dueDate, document.querySelector("#errMsg4"));
+  validateStatusElement(status, document.querySelector("#errMsg5"));
 
-  taskForm.reset(); //Reset validation messages
+  if (checkValidStatus && checkValidDate) {
+    taskManager.addTask(name.value, description.value, assignee.value, dueDate.value, status.value);
+    taskManager.display(); //Resetting the add task form fields.
 
-  clearErrorFields(); //Hiding of the modal after adding task
+    taskForm.reset(); //Reset validation messages
 
-  $("#addModal").modal("hide");
+    clearErrorFields(); //Hiding of the modal after adding task
+
+    $("#addModal").modal("hide");
+  }
 }; // Validation if individual fields are not complete
 
 
 name.addEventListener("input", function (event) {
   if (event.target.value && event.target.value.length <= 8) {
-    errMsg1.innerHTML = "Task name should be longer than 8 characters";
-    errMsg1.style.color = "red";
+    document.querySelector("#errMsg1").innerHTML = "Task name should be longer than 8 characters";
+    document.querySelector("#errMsg1").style.color = "red";
     name.focus();
-    checkValidName = false;
   } else {
-    errMsg1.innerHTML = "Looks Good!";
-    errMsg1.style.color = "green";
-    checkValidName = true;
+    document.querySelector("#errMsg1").innerHTML = "Looks Good!";
+    document.querySelector("#errMsg1").style.color = "green";
   }
 });
 description.addEventListener("input", function (event) {
-  if (event.target.value && event.target.value.length <= 8) {
+  if (event.target.value && event.target.value.length <= 15) {
     //errMsg1.innerHTML = "";
-    errMsg2.innerHTML = "Task description should be longer than 15 characters";
-    errMsg2.style.color = "red";
+    document.querySelector("#errMsg2").innerHTML = "Task description should be longer than 15 characters";
+    document.querySelector("#errMsg2").style.color = "red";
     description.focus();
-    checkValidDesc = false;
   } else {
-    errMsg2.innerHTML = "Looks Good!";
-    errMsg2.style.color = "green";
-    checkValidDesc = true;
+    document.querySelector("#errMsg2").innerHTML = "Looks Good!";
+    document.querySelector("#errMsg2").style.color = "green";
   }
 });
 assignee.addEventListener("input", function (event) {
   if (event.target.value && event.target.value.length <= 8) {
     //errMsg1.innerHTML = "";
-    errMsg3.innerHTML = "Assignee name should be longer than 8 characters";
-    errMsg3.style.color = "red";
+    document.querySelector("#errMsg3").innerHTML = "Assignee name should be longer than 8 characters";
+    document.querySelector("#errMsg3").style.color = "red";
     assignee.focus();
-    checkValidAssignee = false;
   } else {
-    errMsg3.innerHTML = "Looks Good!";
-    errMsg3.style.color = "green";
-    checkValidAssignee = true;
+    document.querySelector("#errMsg3").innerHTML = "Looks Good!";
+    document.querySelector("#errMsg3").style.color = "green";
   }
 });
-date.addEventListener("change", function (event) {
-  if (event.target.value == 0) {
-    //errMsg1.innerHTML = "";
-    errMsg4.innerHTML = "Please select a valid date.";
-    errMsg4.style.color = "red";
-    date.focus();
-    checkValidDate = false;
-  } else {
-    errMsg4.innerHTML = "Looks Good!";
-    errMsg4.style.color = "green";
+
+function validateDateElement(dateElement, errorElement) {
+  var currentDate = new Date();
+  var dueDateValue = new Date(dateElement.value);
+
+  if (dateElement.value == "") {
+    dateElement.value = new Date().toISOString().slice(0, 10);
     checkValidDate = true;
-  }
-});
-status.addEventListener("change", function (event) {
-  if (event.target.value === "Please Choose") {
+  } else if (dueDateValue.value < currentDate) {
+    errorElement.innerHTML = "Please choose a date from today";
+    errorElement.style.color = "red";
+    dateElement.focus();
+    checkValidDate = false;
+  } else checkValidDate = true;
+}
+
+function validateStatusElement(statusElement, errorElement) {
+  if (statusElement.value === "Please choose") {
     //errMsg1.innerHTML = "";
-    errMsg5.innerHTML = "Please select a valid status.";
-    errMsg5.style.color = "red";
-    status.focus();
+    errorElement.innerHTML = "Please select a valid status.";
+    errorElement.style.color = "red";
+    statusElement.focus();
     checkValidStatus = false;
   } else {
-    errMsg5.innerHTML = "Looks Good!";
-    errMsg5.style.color = "green";
+    errorElement.innerHTML = "Looks Good!";
+    errorElement.style.color = "green";
     checkValidStatus = true;
+  }
+}
+
+tname.addEventListener("input", function (event) {
+  if (event.target.value && event.target.value.length <= 8) {
+    document.querySelector("#errMsg6").innerHTML = "Task name should be longer than 8 characters";
+    document.querySelector("#errMsg6").style.color = "red";
+    tname.focus();
+  } else {
+    document.querySelector("#errMsg6").innerHTML = "Looks Good!";
+    document.querySelector("#errMsg6").style.color = "green";
+  }
+});
+tdesc.addEventListener("input", function (event) {
+  if (event.target.value && event.target.value.length <= 15) {
+    //errMsg1.innerHTML = "";
+    document.querySelector("#errMsg7").innerHTML = "Task description should be longer than 15 characters";
+    document.querySelector("#errMsg7").style.color = "red";
+    tdesc.focus();
+  } else {
+    document.querySelector("#errMsg7").innerHTML = "Looks Good!";
+    document.querySelector("#errMsg7").style.color = "green";
+  }
+});
+tassignee.addEventListener("input", function (event) {
+  if (event.target.value && event.target.value.length <= 8) {
+    //errMsg1.innerHTML = "";
+    document.querySelector("#errMsg8").innerHTML = "Assignee name should be longer than 8 characters";
+    document.querySelector("#errMsg8").style.color = "red";
+    tassignee.focus();
+  } else {
+    document.querySelector("#errMsg8").innerHTML = "Looks Good!";
+    document.querySelector("#errMsg8").style.color = "green";
   }
 }); // Clear all error message labels
 
 function clearErrorFields() {
-  errMsg1.innerHTML = "";
-  errMsg2.innerHTML = "";
-  errMsg3.innerHTML = "";
-  errMsg4.innerHTML = "";
-  errMsg5.innerHTML = "";
+  document.querySelector("#errMsg1").innerHTML = "";
+  document.querySelector("#errMsg2").innerHTML = "";
+  document.querySelector("#errMsg3").innerHTML = "";
+  document.querySelector("#errMsg4").innerHTML = "";
+  document.querySelector("#errMsg5").innerHTML = "";
+  document.querySelector("#errMsg6").innerHTML = "";
+  document.querySelector("#errMsg7").innerHTML = "";
+  document.querySelector("#errMsg8").innerHTML = "";
+  document.querySelector("#errMsg9").innerHTML = "";
+  document.querySelector("#errMsg10").innerHTML = "";
 }
-/*function validateFormElements(name,description,assignee,dueDate,mode){
-    var errMsg1 = "";
-    var errMsg2 = "";
-    var errMsg3 = "";
-    var errMsg4 = "";
-    if(mode == "ADD"){
-       errMsg1 =  "#errMsg1";
-       errMsg2 = "#errMsg2";
-       errMsg3 = "#errMsg3";
-       errMsg4 = "#errMsg4";
-    }
-    else{
-        errMsg1 =  "#errMsg6";
-       errMsg2 = "#errMsg7";
-       errMsg3 = "#errMsg8";
-       errMsg4 = "#errMsg9";
-    }
-    if (name.value == "" || name.value.length < 8 ) {
-        setErrorMessage("This field cannot be blank, must be 8 chars long and can be alpha numeric",errMsg1);
-        name.style.borderColor = "red";
-        name.focus();
-        checkValidName=false;
-    } else {
-        setValidationSuccessMessage(errMsg1);
-        name.style.border = "none";
-        checkValidName = true;
-    }
-    if (description.value == "" || description.value.length < 15 ) {
-        setErrorMessage("This field cannot be blank and must be 15 chars long",errMsg2);
-        description.style.borderColor = "red";
-        description.focus();
-        checkValidDesc=false;
-    }       else {
-        setValidationSuccessMessage(errMsg2);
-        description.style.border = "none";
-        checkValidDesc=true;
-    }
-    if (assignee.value == "" || assignee.value.length < 8) {
-        setErrorMessage("This field cannot be blank and must be 8 chars long",errMsg3);
-        assignee.style.borderColor = "red";
-        assignee.focus();
-        checkValidAssignee = false;
-    } else {
-        setValidationSuccessMessage(errMsg3);
-        assignee.style.border = "none";
-        checkValidAssignee = true;
-    }
-    // var currentDate = new Date();
-    // dueDateValue = new Date(dueDate.value);
-    // if (dueDateValue.value == undefined || dueDateValue < currentDate){
-    //     setErrorMessage("The date is lesser than current date",errMsg4);
-    //     dueDate.style.borderColor = "red";
-    //     dueDate.focus();
-    //     checkValidDate = false;
-    // }
-    // else{
-    //     setValidationSuccessMessage(errMsg4);
-    //     dueDate.style.border = "none";
-    //     checkValidDate = true;
-    // }
-        
-
-}
-
-*/
-
 
 edttask.onclick = function () {
-  validateFormElements(tname, tdesc, tassignee, tdate, mode); //later call the validation function.
+  //const tid = document.getElementById("editTaskID");
+  var tname = document.getElementById("editTaskName");
+  var tdesc = document.getElementById("editTextDescription");
+  var tassignee = document.getElementById("editAssignedTo");
+  var tdate = document.getElementById("editDueDate");
+  var tstatus = document.getElementById("editTaskStatus");
+  validateDateElement(tdate, document.querySelector("#errMsg9"));
+  validateStatusElement(tstatus, document.querySelector("#errMsg10"));
 
-  if (checkValidName && checkValidDesc && checkValidAssignee && checkValidDate) {
-    taskManager.updateTask(tid.value, tname.value, tdesc.value, tassignee.value, tdate.value, tstatus.selected);
-    resetValidationMessages();
+  if (checkValidStatus && checkValidDate) {
+    taskManager.updateTask(taskID, tname.value, tdesc.value, tassignee.value, tdate.value, tstatus.value);
+    taskManager.display();
+    clearErrorFields();
     $("#editModal").modal("hide");
-  } else $("#editModal").focus(); // else {
-  //     return false;
-  // }
-
+  }
 };
 
 function editTaskClicked(event) {
   var currentElement = $(this.parentElement).closest("#taskEdit")[0].getElementsByTagName("p");
-  var taskID = currentElement[0].id;
+  taskID = currentElement[0].id;
   var taskName = currentElement[0].innerText;
   var contentsToSplit = currentElement[1].innerText.split('-');
   var taskDesc = contentsToSplit[0];
   var taskAssignee = contentsToSplit[1];
   var taskDate = contentsToSplit[2] + "-" + contentsToSplit[3] + "-" + contentsToSplit[4];
   var taskStatus = contentsToSplit[5];
-  document.getElementById("editTaskID").value = taskID;
   document.getElementById("editTaskName").value = taskName;
   document.getElementById("editTextDescription").value = taskDesc;
   document.getElementById("editAssignedTo").value = taskAssignee;
@@ -494,6 +497,8 @@ function deleteTaskClicked(event) {
   taskManager.deleteTask(taskID);
   taskManager.display();
 }
+
+function byStatus(event) {}
 },{"./taskmanager.js":"taskmanager.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -522,7 +527,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53943" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60209" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
