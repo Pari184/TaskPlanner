@@ -77,14 +77,15 @@ export default class TaskManager {
         
     // To display all the tasks from "tasks" array.
     display() {
+        
         this.parent.innerHTML = "";
         var cardheading = `<div class="card mb-3" id="tasksummary">
         <div class="card-header pl-0 pr-0">
             <div class="row no-gutters w-100 align-items-center">
-                <div class="col ml-3">Tasks</div>
-                <div class="col-3 text-muted">
+                <div class="col ml-3"><strong>Tasks</strong></div>
+                <div class="col-4">
                     <div class="row no-gutters align-items-center">
-                        <div class="col">Edit/Delete</div>
+                        <div class="col"><strong>Edit/Delete</strong></div>
                     </div>
                 </div>
             </div>
@@ -99,6 +100,43 @@ export default class TaskManager {
                 this.parent.append(taskElement);
             });
         }
+
+    }
+
+    displayStatus(selectedStatus) {
+        let taskElementByStatus;
+        this.parent.innerHTML = "";
+        if(selectedStatus === "All Tasks"){
+            this.display();
+        }
+        let cardheading = `<div class="card mb-3" id="tasksummary">
+        <div class="card-header pl-0 pr-0">
+            <div class="row no-gutters w-100 align-items-center" id="bhead">
+                <div class="col ml-3">Tasks</div>
+                <div class="col-4 ml-3">Edit/Delete</div>                   
+            </div>
+        </div>`;
+        const helement = document.createRange().createContextualFragment(cardheading);
+     this.parent.append(helement);
+
+
+        this.tasks.forEach((task) => {
+            if (task.status === selectedStatus){
+             taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
+            this.parent.append(taskElementByStatus);
+            }
+        });
+        
+        // if (this.tasks.length < 1) {
+        //     cardheading = "";
+        // } else {
+        //     const helement = document.createRange().createContextualFragment(cardheading);
+        //     this.parent.append(helement);
+        //     this.tasks.forEach((task) => {
+        //         const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
+        //         this.parent.append(taskElement);
+        //     });
+        // }
 
     }
 }

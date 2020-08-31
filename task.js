@@ -15,12 +15,13 @@ export default class Task {
             const HTML = `
         <div class="card-body py-3">
         <div class="row no-gutters align-items-center" id="taskEdit">
-            <div class="col"> <p class="text-big"   id="${this.id}" data-abc="true">${this.name}</p>
-            <p class="text-big">${this.description}-${this.assignee}-${this.date}-${this.status}</p>
+            <div class="col"> <p class="text-big" id="${this.id}" data-abc="true">${this.name} - ${this.date}</p>
+            <p class="text-big">${this.description}</p>
+            <p class="text-big">${this.assignee}-${this.status}</p>
             </div>
-            <div class="col-3 text-muted">           
-                <button class="edit btn btn-primary ml-2"><i class="far fa-edit"></i></i></button>
-                <button class="delete btn btn-danger"><i class="far fa-trash-alt"></i></i></button>               
+            <div class="col-4 text-muted">           
+                <button class="edit btn btn-primary ml-4"><i class="far fa-edit"></i></i></button>
+                <button class="delete btn btn-danger ml-4"><i class="far fa-trash-alt"></i></i></button>               
             </div>
         </div>
         </div>

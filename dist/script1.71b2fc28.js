@@ -149,7 +149,7 @@ var Task = /*#__PURE__*/function () {
   _createClass(Task, [{
     key: "toHTMLString",
     value: function toHTMLString() {
-      var HTML = "\n        <div class=\"card-body py-3\">\n        <div class=\"row no-gutters align-items-center\" id=\"taskEdit\">\n            <div class=\"col\"> <p class=\"text-big\"   id=\"".concat(this.id, "\" data-abc=\"true\">").concat(this.name, "</p>\n            <p class=\"text-big\">").concat(this.description, "-").concat(this.assignee, "-").concat(this.date, "-").concat(this.status, "</p>\n            </div>\n            <div class=\"col-3 text-muted\">           \n                <button class=\"edit btn btn-primary ml-2\"><i class=\"far fa-edit\"></i></i></button>\n                <button class=\"delete btn btn-danger\"><i class=\"far fa-trash-alt\"></i></i></button>               \n            </div>\n        </div>\n        </div>\n        <hr class=\"m-0\">\n    ");
+      var HTML = "\n        <div class=\"card-body py-3\">\n        <div class=\"row no-gutters align-items-center\" id=\"taskEdit\">\n            <div class=\"col\"> <p class=\"text-big\" id=\"".concat(this.id, "\" data-abc=\"true\">").concat(this.name, " - ").concat(this.date, "</p>\n            <p class=\"text-big\">").concat(this.description, "</p>\n            <p class=\"text-big\">").concat(this.assignee, "-").concat(this.status, "</p>\n            </div>\n            <div class=\"col-4 text-muted\">           \n                <button class=\"edit btn btn-primary ml-4\"><i class=\"far fa-edit\"></i></i></button>\n                <button class=\"delete btn btn-danger ml-4\"><i class=\"far fa-trash-alt\"></i></i></button>               \n            </div>\n        </div>\n        </div>\n        <hr class=\"m-0\">\n    ");
       return HTML;
     } // Function to create HTML elements for task
 
@@ -275,7 +275,7 @@ var TaskManager = /*#__PURE__*/function () {
       var _this = this;
 
       this.parent.innerHTML = "";
-      var cardheading = "<div class=\"card mb-3\" id=\"tasksummary\">\n        <div class=\"card-header pl-0 pr-0\">\n            <div class=\"row no-gutters w-100 align-items-center\">\n                <div class=\"col ml-3\">Tasks</div>\n                <div class=\"col-3 text-muted\">\n                    <div class=\"row no-gutters align-items-center\">\n                        <div class=\"col\">Edit/Delete</div>\n                    </div>\n                </div>\n            </div>\n        </div>";
+      var cardheading = "<div class=\"card mb-3\" id=\"tasksummary\">\n        <div class=\"card-header pl-0 pr-0\">\n            <div class=\"row no-gutters w-100 align-items-center\">\n                <div class=\"col ml-3\"><strong>Tasks</strong></div>\n                <div class=\"col-4\">\n                    <div class=\"row no-gutters align-items-center\">\n                        <div class=\"col\"><strong>Edit/Delete</strong></div>\n                    </div>\n                </div>\n            </div>\n        </div>";
 
       if (this.tasks.length < 1) {
         cardheading = "";
@@ -288,6 +288,38 @@ var TaskManager = /*#__PURE__*/function () {
           _this.parent.append(taskElement);
         });
       }
+    }
+  }, {
+    key: "displayStatus",
+    value: function displayStatus(selectedStatus) {
+      var _this2 = this;
+
+      var taskElementByStatus;
+      this.parent.innerHTML = "";
+
+      if (selectedStatus === "All Tasks") {
+        this.display();
+      }
+
+      var cardheading = "<div class=\"card mb-3\" id=\"tasksummary\">\n        <div class=\"card-header pl-0 pr-0\">\n            <div class=\"row no-gutters w-100 align-items-center\" id=\"bhead\">\n                <div class=\"col ml-3\">Tasks</div>\n                <div class=\"col-4 ml-3\">Edit/Delete</div>                   \n            </div>\n        </div>";
+      var helement = document.createRange().createContextualFragment(cardheading);
+      this.parent.append(helement);
+      this.tasks.forEach(function (task) {
+        if (task.status === selectedStatus) {
+          taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
+
+          _this2.parent.append(taskElementByStatus);
+        }
+      }); // if (this.tasks.length < 1) {
+      //     cardheading = "";
+      // } else {
+      //     const helement = document.createRange().createContextualFragment(cardheading);
+      //     this.parent.append(helement);
+      //     this.tasks.forEach((task) => {
+      //         const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
+      //         this.parent.append(taskElement);
+      //     });
+      // }
     }
   }]);
 
@@ -496,9 +528,30 @@ function deleteTaskClicked(event) {
   var taskID = currentElement[0].id;
   taskManager.deleteTask(taskID);
   taskManager.display();
-}
+} //let statusCheck = document.querySelector("button.dropdown-item").addEventListener("click", byStatus);
 
-function byStatus(event) {}
+
+var statusInprogress = document.querySelector("#inprogress"); // assign Done button to counterDone variable
+
+statusInprogress.addEventListener("click", byStatus);
+var statusTodo = document.querySelector("#todo"); // assign Done button to counterDone variable
+
+statusTodo.addEventListener("click", byStatus);
+var statusReview = document.querySelector("#review"); // assign Done button to counterDone variable
+
+statusReview.addEventListener("click", byStatus);
+var statusDone = document.querySelector("#done"); // assign Done button to counterDone variable
+
+statusDone.addEventListener("click", byStatus);
+var statusAll = document.querySelector("#allTask"); // assign Done button to counterDone variable
+
+statusAll.addEventListener("click", byStatus);
+
+function byStatus(event) {
+  var selectedStatus = event.target.value;
+  console.log(selectedStatus);
+  taskManager.displayStatus(selectedStatus);
+}
 },{"./taskmanager.js":"taskmanager.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -527,7 +580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60209" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60056" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -704,4 +757,3 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script1.js"], null)
-//# sourceMappingURL=/script1.71b2fc28.js.map
