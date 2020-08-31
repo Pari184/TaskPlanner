@@ -22,14 +22,21 @@ body {
 
 .btn-primary {
     color: #fff;
-    background-color: rgb(52, 126, 18);
+    background: linear-gradient(50deg, #0a632f 0, #32c50d 100%);
     border-color: rgb(52, 126, 18);
+}
+
+.btn-danger {
+    color: #fff;
+    background: linear-gradient(50deg, #f01607, #f17126, 100%);
+    border-color: rgb(238, 37, 10);
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: rgb(52, 126, 18);
-    border-color: rgb(52, 126, 18); /*set the color you want here*/
+    background: linear-gradient(50deg, #0a632f 0, #32c50d 100%);
+    border-color: rgb(52, 126, 18); /*set the color you want here*/  
+
 }
 
 
@@ -48,7 +55,7 @@ h1 {
     width: 180px;
     margin-right: 20px;
     border-radius: 2rem;
-    background-color: rgb(52, 126, 18);
+    background: linear-gradient(50deg, #0a632f 0, #32c50d 100%);
 }
 
 

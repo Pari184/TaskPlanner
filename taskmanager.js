@@ -10,10 +10,20 @@ export default class TaskManager {
 
         }
         // Function to add a task after successful validation and push the task to tasks array.
-    addTask(name, description, assignee, date, status) {
-        const task = new Task(`task${this.currentId++}`, name, description, assignee, date, status);
-        this.tasks.push(task);
-    }
+        addTask(name, description, assignee, date, status) {
+            const task = new Task(`task${this.currentId++}`, name, description, assignee, date, status);
+            this.tasks.push(task);
+            this.toAddToLocalStorage(task);
+        }
+
+         //Adding task to Local Storage
+        toAddToLocalStorage(task){ 
+            localStorage.setItem ('currentId', this.currentId);
+            let myNewTasks = JSON.parse(localStorage.getItem("myTask")) || [];
+            myNewTasks.push(task);
+            localStorage.setItem('myTask', JSON.stringify(myNewTasks));
+        }
+
     // Function to update the task with new edited values after successful validation.
     updateTask(id, name, description, assignee, date, status) {
         for (let i = 0; i < this.tasks.length; i++) {
@@ -25,16 +35,44 @@ export default class TaskManager {
                 this.tasks[i].status = status;
                 //this.display();
                 //break;
-            }
+                this.toUpdateInLocalStorage(id, name, description, assignee, date, status);
+            }           
+
         }
 
     }
+     //Update in Local Storage
+    toUpdateInLocalStorage(id, name, description, assignee, date, status){
+       let myNewTask = JSON.parse(localStorage.getItem('myTask'));
+        for (let i = 0; i < myNewTask.length; i++) {
+            if (myNewTask[i].id == id) {
+            myNewTask[i].name = name;
+            myNewTask[i].description = description;
+            myNewTask[i].assignee = assignee;
+            myNewTask[i].date = date;
+            myNewTask[i].status = status;
+            localStorage.setItem('myTask',JSON.stringify(myNewTask));
+            }
+        }
+    }
+    
     // Function for deleting a task whose id is passed.
     deleteTask(id) {
             this.tasks = this.tasks.filter(
                 (t) => t.id !== id);
             //this.display();
+            this.toDeleteFromLocalStorage(id);
+            //this.display();
         }
+        
+        //Remove task from local storage
+    toDeleteFromLocalStorage(id){
+        let myNewTask = JSON.parse(localStorage.getItem('myTask'));
+        myNewTask = myNewTask.filter(
+            (t) => t.id !== id);       
+            localStorage.setItem('myTask',JSON.stringify(myNewTask));         
+    }
+
 
         
     // To display all the tasks from "tasks" array.
