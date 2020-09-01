@@ -33,7 +33,7 @@ const tassignee = document.getElementById("editAssignedTo");
 const tdate = document.getElementById("editDueDate");
 const tstatus = document.getElementById("editTaskStatus");
 
-
+taskManager.display();
 //Function onclick of "Add Task" button
 addBtn.onclick = function() {   
         //Calling addTask function in TaskManager class after successful validation by passing values  
