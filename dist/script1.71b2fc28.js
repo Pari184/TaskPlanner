@@ -274,15 +274,37 @@ var TaskManager = /*#__PURE__*/function () {
     value: function display() {
       var _this = this;
 
-      this.parent.innerHTML = "";
-      var cardheading = "<div class=\"card mb-3\" id=\"tasksummary\">\n        <div class=\"card-header pl-0 pr-0\">\n            <div class=\"row no-gutters w-100 align-items-center\">\n                <div class=\"col ml-3\"><strong>Tasks</strong></div>\n                <div class=\"col-4\">\n                    <div class=\"row no-gutters align-items-center\">\n                        <div class=\"col\"><strong>Edit/Delete</strong></div>\n                    </div>\n                </div>\n            </div>\n        </div>";
+      this.parent.innerHTML = ""; //Refresh the landing page
+      //String for card heading in landing page
+
+      var cardheading = "<div class=\"card mb-3\" id=\"tasksummary\">\n        <div class=\"card-header pl-0 pr-0\">\n            <div class=\"row no-gutters w-100 align-items-center\">\n                <div class=\"col ml-3\"><strong>Tasks</strong></div>\n                <div class=\"col-4\">\n                    <div class=\"row no-gutters align-items-center\">\n                        <div class=\"col\"><strong>Edit/Delete</strong></div>\n                    </div>\n                </div>\n            </div>\n        </div>"; //Check if the browser is refreshed/closed
 
       if (this.tasks.length < 1) {
-        cardheading = "";
+        //Get data from local storage
+        var displayArray = JSON.parse(localStorage.getItem("myTask")) || [];
+        console.log(displayArray); //Check if local storage is empty ( cleared )
+
+        if (displayArray.length < 1) {
+          cardheading = ""; //No cardheading in the landing page
+        } else {
+          //Data is in local storage and should be displayed on main page
+          for (var i = 0; i < displayArray.length; i++) {
+            var dtask = new _task.default(displayArray[i].id, displayArray[i].name, displayArray[i].description, displayArray[i].assignee, displayArray[i].date, displayArray[i].status);
+            this.tasks.push(dtask);
+          }
+
+          this.tasks.forEach(function (dtask) {
+            console.log(dtask);
+            var taskElement = dtask.toHtmlElement(_this.editTaskClicked, _this.deleteTaskClicked);
+
+            _this.parent.append(taskElement);
+          });
+        }
       } else {
         var helement = document.createRange().createContextualFragment(cardheading);
         this.parent.append(helement);
         this.tasks.forEach(function (task) {
+          console.log(task);
           var taskElement = task.toHtmlElement(_this.editTaskClicked, _this.deleteTaskClicked);
 
           _this.parent.append(taskElement);
@@ -359,7 +381,8 @@ var tname = document.getElementById("editTaskName");
 var tdesc = document.getElementById("editTextDescription");
 var tassignee = document.getElementById("editAssignedTo");
 var tdate = document.getElementById("editDueDate");
-var tstatus = document.getElementById("editTaskStatus"); //Function onclick of "Add Task" button
+var tstatus = document.getElementById("editTaskStatus");
+taskManager.display(); //Function onclick of "Add Task" button
 
 addBtn.onclick = function () {
   //Calling addTask function in TaskManager class after successful validation by passing values  
@@ -580,7 +603,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60056" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60314" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -757,3 +780,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script1.js"], null)
+//# sourceMappingURL=/script1.71b2fc28.js.map

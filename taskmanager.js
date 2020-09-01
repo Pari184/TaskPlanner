@@ -73,12 +73,11 @@ export default class TaskManager {
             localStorage.setItem('myTask',JSON.stringify(myNewTask));         
     }
 
-
         
     // To display all the tasks from "tasks" array.
     display() {
-        
-        this.parent.innerHTML = "";
+        this.parent.innerHTML = "";//Refresh the landing page
+        //String for card heading in landing page
         var cardheading = `<div class="card mb-3" id="tasksummary">
         <div class="card-header pl-0 pr-0">
             <div class="row no-gutters w-100 align-items-center">
@@ -90,16 +89,37 @@ export default class TaskManager {
                 </div>
             </div>
         </div>`;
+        //Check if the browser is refreshed/closed
         if (this.tasks.length < 1) {
-            cardheading = "";
-        } else {
+            //Get data from local storage
+            let displayArray = JSON.parse(localStorage.getItem("myTask")) || [];
+            console.log(displayArray);
+            //Check if local storage is empty ( cleared )
+            if (displayArray.length < 1){
+                cardheading = ""; //No cardheading in the landing page
+            }
+            else { //Data is in local storage and should be displayed on main page
+                for (let i = 0; i < displayArray.length; i++ ){
+                    const dtask = new Task(displayArray[i].id, displayArray[i].name, displayArray[i].description, displayArray[i].assignee, displayArray[i].date, displayArray[i].status);
+                    this.tasks.push(dtask);         
+                }
+                this.tasks.forEach((dtask) => {
+                console.log(dtask);
+                const taskElement = dtask.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
+                this.parent.append(taskElement);
+                    });
+                }
+            } 
+        else {
             const helement = document.createRange().createContextualFragment(cardheading);
             this.parent.append(helement);
             this.tasks.forEach((task) => {
-                const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
-                this.parent.append(taskElement);
-            });
-        }
+            console.log(task);
+            const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
+            this.parent.append(taskElement);
+                });
+
+            }
 
     }
 
@@ -117,7 +137,7 @@ export default class TaskManager {
             </div>
         </div>`;
         const helement = document.createRange().createContextualFragment(cardheading);
-     this.parent.append(helement);
+        this.parent.append(helement);
 
 
         this.tasks.forEach((task) => {
