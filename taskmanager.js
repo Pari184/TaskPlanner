@@ -106,7 +106,7 @@ export default class TaskManager {
                 const helement = document.createRange().createContextualFragment(cardheading);
                 this.parent.append(helement);
                 this.tasks.forEach((dtask) => {
-                console.log(dtask);
+                //console.log(dtask);
                 const taskElement = dtask.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
                 this.parent.append(taskElement);
                     });
@@ -116,7 +116,7 @@ export default class TaskManager {
             const helement = document.createRange().createContextualFragment(cardheading);
             this.parent.append(helement);
             this.tasks.forEach((task) => {
-            console.log(task);
+            //console.log(task);
             const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
             this.parent.append(taskElement);
                 });
@@ -154,11 +154,13 @@ export default class TaskManager {
              taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
             this.parent.append(taskElementByStatus);
             }
-            else if (task.date === selectedStatus){
+            //Today task
+            else if (task.date === new Date().toISOString().slice(0,10)){
                 taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
                this.parent.append(taskElementByStatus);
                }
         });
+
         
         // if (this.tasks.length < 1) {
         //     cardheading = "";
