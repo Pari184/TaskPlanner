@@ -149,7 +149,7 @@ var Task = /*#__PURE__*/function () {
   _createClass(Task, [{
     key: "toHTMLString",
     value: function toHTMLString() {
-      var HTML = "\n        <div class=\"card-body py-3\">\n        <div class=\"row no-gutters align-items-center\" id=\"taskEdit\">\n            <div class=\"col\"> <p class=\"text-big\" id=\"".concat(this.id, "\" data-abc=\"true\">").concat(this.name, " - ").concat(this.date, "</p>\n            <p class=\"text-big\">").concat(this.description, "</p>\n            <p class=\"text-big\">").concat(this.assignee, "-").concat(this.status, "</p>\n            </div>\n            <div class=\"col-4 text-muted\">           \n                <button class=\"edit btn btn-primary ml-4\"><i class=\"far fa-edit\"></i></i></button>\n                <button class=\"delete btn btn-danger ml-4\"><i class=\"far fa-trash-alt\"></i></i></button>               \n            </div>\n        </div>\n        </div>\n        <hr class=\"m-0\">\n    ");
+      var HTML = "\n        <div class=\"card-body py-3\">\n        <div class=\"row no-gutters align-items-center\" id=\"taskEdit\">\n            <div class=\"col\"> <p class=\"text-big\" id=\"".concat(this.id, "\" data-abc=\"true\">").concat(this.name, "-").concat(this.date, "</p>\n            <p class=\"text-big\">").concat(this.description, "</p>\n            <p class=\"text-big\">").concat(this.assignee, "-").concat(this.status, "</p>\n            </div>\n            <div class=\"col-4 text-muted\">           \n                <button class=\"edit btn btn-primary ml-4\"><i class=\"far fa-edit\"></i></i></button>\n                <button class=\"delete btn btn-danger ml-4\"><i class=\"far fa-trash-alt\"></i></i></button>               \n            </div>\n        </div>\n        </div>\n        <hr class=\"m-0\">\n    ");
       return HTML;
     } // Function to create HTML elements for task
 
@@ -296,7 +296,7 @@ var TaskManager = /*#__PURE__*/function () {
           var helement = document.createRange().createContextualFragment(cardheading);
           this.parent.append(helement);
           this.tasks.forEach(function (dtask) {
-            console.log(dtask);
+            //console.log(dtask);
             var taskElement = dtask.toHtmlElement(_this.editTaskClicked, _this.deleteTaskClicked);
 
             _this.parent.append(taskElement);
@@ -307,7 +307,7 @@ var TaskManager = /*#__PURE__*/function () {
 
         this.parent.append(_helement);
         this.tasks.forEach(function (task) {
-          console.log(task);
+          //console.log(task);
           var taskElement = task.toHtmlElement(_this.editTaskClicked, _this.deleteTaskClicked);
 
           _this.parent.append(taskElement);
@@ -341,11 +341,12 @@ var TaskManager = /*#__PURE__*/function () {
           taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
 
           _this2.parent.append(taskElementByStatus);
-        } else if (task.date === selectedStatus) {
-          taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
+        } //Today task
+        else if (task.date === new Date().toISOString().slice(0, 10)) {
+            taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
 
-          _this2.parent.append(taskElementByStatus);
-        }
+            _this2.parent.append(taskElementByStatus);
+          }
       }); // if (this.tasks.length < 1) {
       //     cardheading = "";
       // } else {
@@ -378,11 +379,11 @@ var checkValidDate = false; //div in html to append new tasks.
 
 var taskContainer = document.querySelector('#tasksummary'); //Instance of TaskManager class
 
-var id;
-var currentTasks = JSON.parse(localStorage.getItem("myTask")) || [];
-var currentID = JSON.parse(localStorage.getItem("currentId")) || 0;
+var id; //const currentTasks = JSON.parse(localStorage.getItem("myTask")) || [];
 
-if (currentTasks.length < 1 && currentID == 0) {
+var currentID = JSON.parse(localStorage.getItem("currentId")) || 0; //if ((currentTasks.length < 1) && (currentID == 0))
+
+if (currentID == 0) {
   id = 1;
 } else {
   id = currentID;
@@ -466,7 +467,7 @@ function validateDateElement(dateElement, errorElement) {
   if (dateElement.value == "") {
     dateElement.value = new Date().toISOString().slice(0, 10);
     checkValidDate = true;
-  } else if (dueDateValue.value < currentDate) {
+  } else if (dueDateValue < currentDate) {
     errorElement.innerHTML = "Please choose a date from today";
     errorElement.style.color = "red";
     dateElement.focus();
@@ -555,17 +556,21 @@ edttask.onclick = function () {
 function editTaskClicked(event) {
   var currentElement = $(this.parentElement).closest("#taskEdit")[0].getElementsByTagName("p");
   taskID = currentElement[0].id;
-  var taskName = currentElement[0].innerText;
-  var contentsToSplit = currentElement[1].innerText.split('-');
-  var taskDesc = contentsToSplit[0];
-  var taskAssignee = contentsToSplit[1];
-  var taskDate = contentsToSplit[2] + "-" + contentsToSplit[3] + "-" + contentsToSplit[4];
-  var taskStatus = contentsToSplit[5];
+  var contentsToSplit1 = currentElement[0].innerText.split('-');
+  var taskName = contentsToSplit1[0]; //console.log(contentsToSplit1);
+
+  var contentsToSplit = currentElement[2].innerHTML.split('-'); //console.log(contentsToSplit);
+
+  var taskDesc = currentElement[1].innerHTML;
+  var taskAssignee = contentsToSplit[0];
+  var taskDate = contentsToSplit1[1] + "-" + contentsToSplit1[2] + "-" + contentsToSplit1[3]; //console.log(taskDate);
+
+  var taskStatus = contentsToSplit[1];
   document.getElementById("editTaskName").value = taskName;
   document.getElementById("editTextDescription").value = taskDesc;
   document.getElementById("editAssignedTo").value = taskAssignee;
   document.getElementById("editDueDate").value = taskDate;
-  document.getElementById("editTaskStatus").selected = taskStatus;
+  document.getElementById("editTaskStatus").value = taskStatus;
   $("#editModal").modal("show");
 }
 
@@ -578,27 +583,33 @@ function deleteTaskClicked(event) {
 } //let statusCheck = document.querySelector("button.dropdown-item").addEventListener("click", byStatus);
 
 
-var statusInprogress = document.querySelector("#inprogress"); // assign Done button to counterDone variable
+var statusInprogress = document.querySelector("#inprogress"); // Inprogress tasks
 
 statusInprogress.addEventListener("click", byStatus);
-var statusTodo = document.querySelector("#todo"); // assign Done button to counterDone variable
+var statusTodo = document.querySelector("#todo"); // To Do tasks
 
 statusTodo.addEventListener("click", byStatus);
-var statusReview = document.querySelector("#review"); // assign Done button to counterDone variable
+var statusReview = document.querySelector("#review"); // Review tasks
 
 statusReview.addEventListener("click", byStatus);
-var statusDone = document.querySelector("#done"); // assign Done button to counterDone variable
+var statusDone = document.querySelector("#done"); // Done tasks
 
 statusDone.addEventListener("click", byStatus);
-var statusAll = document.querySelector("#allTask"); // assign Done button to counterDone variable
+var statusAll = document.querySelector("#allTask"); // All tasks 
 
 statusAll.addEventListener("click", byStatus);
 
 function byStatus(event) {
-  var selectedStatus = event.target.value;
-  console.log(selectedStatus);
+  var selectedStatus = event.target.value; //console.log(selectedStatus);
+
   taskManager.displayStatus(selectedStatus);
 }
+
+var todayTask = document.querySelector("#todayTask");
+
+todayTask.onclick = function () {
+  taskManager.displayStatus("");
+};
 },{"./taskmanager.js":"taskmanager.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -627,7 +638,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61457" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52279" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

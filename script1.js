@@ -11,9 +11,10 @@ const taskContainer = document.querySelector('#tasksummary');
 //Instance of TaskManager class
 
 let id;
-const currentTasks = JSON.parse(localStorage.getItem("myTask")) || [];
+//const currentTasks = JSON.parse(localStorage.getItem("myTask")) || [];
 const currentID = JSON.parse(localStorage.getItem("currentId")) || 0;
-if ((currentTasks.length < 1) && (currentID == 0))
+//if ((currentTasks.length < 1) && (currentID == 0))
+if(currentID == 0)
 {
   id = 1;
 }
@@ -22,6 +23,7 @@ else{
   id = currentID;
 }
 const taskManager = new TaskManager(id,taskContainer, editTaskClicked, deleteTaskClicked);
+
 
 //Variable for add task form in html
 const taskForm = document.querySelector('#task-form');
@@ -120,7 +122,7 @@ addBtn.onclick = function() {
       dateElement.value = new Date().toISOString().slice(0,10);
       checkValidDate = true;
     }
-    else if (dueDateValue.value < currentDate){
+    else if (dueDateValue < currentDate){
       errorElement.innerHTML = "Please choose a date from today";
       errorElement.style.color = "red";
       dateElement.focus();
@@ -145,8 +147,6 @@ function validateStatusElement(statusElement,errorElement){
   }
   
 } 
-
- 
   
 
   tname.addEventListener("input", function(event) {
@@ -189,8 +189,6 @@ function validateStatusElement(statusElement,errorElement){
         
     }
   });
-  
-  
 
 
 // Clear all error message labels
@@ -233,18 +231,22 @@ edttask.onclick = function() {
 function editTaskClicked(event) {
     var currentElement = $(this.parentElement).closest("#taskEdit")[0].getElementsByTagName("p");
     taskID = currentElement[0].id;
-    const taskName = currentElement[0].innerText;
-    var contentsToSplit = currentElement[1].innerText.split('-');
-    const taskDesc = contentsToSplit[0];
-    const taskAssignee = contentsToSplit[1];
-    const taskDate = contentsToSplit[2] + "-" + contentsToSplit[3] + "-" + contentsToSplit[4];
-    const taskStatus = contentsToSplit[5];
+    const contentsToSplit1 = currentElement[0].innerText.split('-');
+    const taskName = contentsToSplit1[0];
+    //console.log(contentsToSplit1);
+    var contentsToSplit = currentElement[2].innerHTML.split('-');
+    //console.log(contentsToSplit);
+    const taskDesc = currentElement[1].innerHTML;
+    const taskAssignee = contentsToSplit[0];
+    const taskDate = contentsToSplit1[1] + "-" + contentsToSplit1[2] + "-" + contentsToSplit1[3];
+    //console.log(taskDate);
+    const taskStatus = contentsToSplit[1];
     
     document.getElementById("editTaskName").value = taskName;
     document.getElementById("editTextDescription").value = taskDesc;
     document.getElementById("editAssignedTo").value = taskAssignee;
     document.getElementById("editDueDate").value = taskDate;
-    document.getElementById("editTaskStatus").selected = taskStatus;
+    document.getElementById("editTaskStatus").value = taskStatus;
     $("#editModal").modal("show");
     
 }
@@ -258,23 +260,28 @@ function deleteTaskClicked(event) {
 }
 
 //let statusCheck = document.querySelector("button.dropdown-item").addEventListener("click", byStatus);
-const statusInprogress = document.querySelector("#inprogress"); // assign Done button to counterDone variable
+const statusInprogress = document.querySelector("#inprogress"); // Inprogress tasks
 statusInprogress.addEventListener("click", byStatus);
 
-const statusTodo = document.querySelector("#todo"); // assign Done button to counterDone variable
+const statusTodo = document.querySelector("#todo"); // To Do tasks
 statusTodo.addEventListener("click", byStatus);
 
-const statusReview = document.querySelector("#review"); // assign Done button to counterDone variable
+const statusReview = document.querySelector("#review"); // Review tasks
 statusReview.addEventListener("click", byStatus);
 
-const statusDone = document.querySelector("#done"); // assign Done button to counterDone variable
+const statusDone = document.querySelector("#done"); // Done tasks
 statusDone.addEventListener("click", byStatus);
 
-const statusAll = document.querySelector("#allTask"); // assign Done button to counterDone variable
+const statusAll = document.querySelector("#allTask"); // All tasks 
 statusAll.addEventListener("click", byStatus);
 
 function byStatus(event){
  var selectedStatus = event.target.value;
- console.log(selectedStatus);
+ //console.log(selectedStatus);
  taskManager.displayStatus(selectedStatus);
 }
+
+const todayTask = document.querySelector("#todayTask");
+todayTask.onclick = function (){
+  taskManager.displayStatus("");
+};

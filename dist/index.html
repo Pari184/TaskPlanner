@@ -34,14 +34,15 @@
     <div class="container-fluid mt-100">
 
         <div class="mt-5">
-            <button class="btn btn-wide btn-primary btnNewStyle" data-toggle="modal" data-target="#addModal"> New Task </button>
+            <button class="btn btn-wide btn-primary btnNewStyle" data-toggle="modal" data-target="#addModal"> Add Task </button>
+            <button class="btn btn-wide btn-primary btnNewStyle" id="todayTask"> Current Task </button>
 
             <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Status
                 </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <button class="dropdown-item" value="In Progress" id="inprogress">In Progress</button>
-                <button class="dropdown-item" value="To-do" id="todo">To-do</button>
+                <button class="dropdown-item" value="To Do" id="todo">To Do</button>
                 <button class="dropdown-item" value="Review" id="review">Review</button>
                 <button class="dropdown-item" value="Done" id="done">Done</button>
                 <button class="dropdown-item" value="All Tasks" id="allTask">All Tasks</button>
@@ -126,7 +127,7 @@
                                 <select id="taskStatus" name="status" class="col-sm-6">
                                         <option value="Please choose">Please Choose</option>
                                          <option value="In Progress">In Progress</option>
-                                         <option value="To-do">To-do</option>
+                                         <option value="To Do">To Do</option>
                                          <option value="Review">Review</option>
                                          <option value="Done">Done</option>
                                 </select>
@@ -198,10 +199,11 @@
                             <label class="col-sm-3 col-form-label" for="status">Status</label>
                             <div class="col-sm-6">
                                 <select id="editTaskStatus" name="status" class="col-sm-6">
-                                         <option value="In Progress">In Progress</option>
-                                         <option value="To-Do">To-Do</option>
-                                         <option value="Review">Review</option>
-                                         <option value="Done">Done</option>
+                                        <option value="Please choose">Please Choose</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="To Do">To Do</option>
+                                        <option value="Review">Review</option>
+                                        <option value="Done">Done</option>
                                      </select>
                                 <span id="errMsg10"></span>
                             </div>
