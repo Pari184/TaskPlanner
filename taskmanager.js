@@ -1,9 +1,9 @@
 import Task from "./task.js";
 
 export default class TaskManager {
-    constructor(parent, editTaskClicked, deleteTaskClicked) {
+    constructor(id, parent, editTaskClicked, deleteTaskClicked) {
             this.tasks = [];
-            this.currentId = 1;
+            this.currentId = id;
             this.parent = parent;
             this.editTaskClicked = editTaskClicked;
             this.deleteTaskClicked = deleteTaskClicked;
@@ -93,7 +93,7 @@ export default class TaskManager {
         if (this.tasks.length < 1) {
             //Get data from local storage
             let displayArray = JSON.parse(localStorage.getItem("myTask")) || [];
-            console.log(displayArray);
+            //console.log(displayArray);
             //Check if local storage is empty ( cleared )
             if (displayArray.length < 1){
                 cardheading = ""; //No cardheading in the landing page
@@ -103,6 +103,8 @@ export default class TaskManager {
                     const dtask = new Task(displayArray[i].id, displayArray[i].name, displayArray[i].description, displayArray[i].assignee, displayArray[i].date, displayArray[i].status);
                     this.tasks.push(dtask);         
                 }
+                const helement = document.createRange().createContextualFragment(cardheading);
+                this.parent.append(helement);
                 this.tasks.forEach((dtask) => {
                 console.log(dtask);
                 const taskElement = dtask.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
@@ -124,6 +126,13 @@ export default class TaskManager {
     }
 
     displayStatus(selectedStatus) {
+        // let today = new Date();
+        // var tskDate = new Date("2020-08-29");
+        // console.log(today);
+        // console.log(tskDate);
+        // if(tskDate.getDate() === today.getDate() && tskDate.getMonth() ===today.getMonth() && tskDate.getFullYear() === today.getFullYear()){
+        // console.log("You are in Today");
+        // }
         let taskElementByStatus;
         this.parent.innerHTML = "";
         if(selectedStatus === "All Tasks"){
@@ -145,6 +154,10 @@ export default class TaskManager {
              taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
             this.parent.append(taskElementByStatus);
             }
+            else if (task.date === selectedStatus){
+                taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
+               this.parent.append(taskElementByStatus);
+               }
         });
         
         // if (this.tasks.length < 1) {

@@ -15,6 +15,71 @@ body {
     font-size: .85rem;
 }
 
+header.masthead {
+    position: relative;
+    overflow: hidden;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    background: linear-gradient(0deg, #088F99 0%, #29BFDA 100%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+header.masthead .masthead-content {
+    z-index: 1;
+    position: relative;
+}
+header.masthead .masthead-content .masthead-heading {
+    font-size: 4rem;
+}
+header.masthead .masthead-content .masthead-subheading {
+    font-size: 2rem;
+}
+header.masthead .bg-circle {
+    z-index: 0;
+    position: absolute;
+    border-radius: 100%;
+    background: linear-gradient(0deg, #09D3EE 0%, #197C6F 100%);
+}
+header.masthead .bg-circle-1 {
+    height: 90rem;
+    width: 90rem;
+    bottom: -55rem;
+    left: -55rem;
+}
+header.masthead .bg-circle-2 {
+    height: 50rem;
+    width: 50rem;
+    top: -25rem;
+    right: -25rem;
+}
+header.masthead .bg-circle-3 {
+    height: 20rem;
+    width: 20rem;
+    bottom: -10rem;
+    right: 5%;
+}
+header.masthead .bg-circle-4 {
+    height: 30rem;
+    width: 30rem;
+    top: -5rem;
+    right: 35%;
+}
+@media (min-width: 992px) {
+    header.masthead {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    header.masthead .masthead-content .masthead-heading {
+        font-size: 4rem;
+    }
+    header.masthead .masthead-content .masthead-subheading {
+        font-size: 4rem;
+    }
+}
+
+
 .mt-100 {
     margin-top: 80px
 }
@@ -73,7 +138,7 @@ h1 {
 }
 
 .modal-header {
-    background-color: rgb(52, 126, 18);
+    background: linear-gradient(50deg, #107994 0, #058F71 100%);
 }
 
 .modal-body {
