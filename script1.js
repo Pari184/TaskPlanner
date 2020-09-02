@@ -281,7 +281,7 @@ function byStatus(event){
  taskManager.displayStatus(selectedStatus);
 }
 
-const todayTask = document.querySelector("#todayTask");
-todayTask.onclick = function (){
-  taskManager.displayStatus("");
-};
+// const todayTask = document.querySelector("#todayTask");
+// todayTask.onclick = function (){
+//   taskManager.displayStatus("today");
+// };
