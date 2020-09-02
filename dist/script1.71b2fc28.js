@@ -341,22 +341,8 @@ var TaskManager = /*#__PURE__*/function () {
           taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
 
           _this2.parent.append(taskElementByStatus);
-        } //Today task
-        else if (task.date === new Date().toISOString().slice(0, 10)) {
-            taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
-
-            _this2.parent.append(taskElementByStatus);
-          }
-      }); // if (this.tasks.length < 1) {
-      //     cardheading = "";
-      // } else {
-      //     const helement = document.createRange().createContextualFragment(cardheading);
-      //     this.parent.append(helement);
-      //     this.tasks.forEach((task) => {
-      //         const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
-      //         this.parent.append(taskElement);
-      //     });
-      // }
+        }
+      });
     }
   }]);
 
@@ -603,13 +589,10 @@ function byStatus(event) {
   var selectedStatus = event.target.value; //console.log(selectedStatus);
 
   taskManager.displayStatus(selectedStatus);
-}
-
-var todayTask = document.querySelector("#todayTask");
-
-todayTask.onclick = function () {
-  taskManager.displayStatus("");
-};
+} // const todayTask = document.querySelector("#todayTask");
+// todayTask.onclick = function (){
+//   taskManager.displayStatus("today");
+// };
 },{"./taskmanager.js":"taskmanager.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -638,7 +621,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52279" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55935" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -154,25 +154,9 @@ export default class TaskManager {
              taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
             this.parent.append(taskElementByStatus);
             }
-            //Today task
-            else if (task.date === new Date().toISOString().slice(0,10)){
-                taskElementByStatus = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
-               this.parent.append(taskElementByStatus);
-               }
+          
         });
-
         
-        // if (this.tasks.length < 1) {
-        //     cardheading = "";
-        // } else {
-        //     const helement = document.createRange().createContextualFragment(cardheading);
-        //     this.parent.append(helement);
-        //     this.tasks.forEach((task) => {
-        //         const taskElement = task.toHtmlElement(this.editTaskClicked, this.deleteTaskClicked);
-        //         this.parent.append(taskElement);
-        //     });
-        // }
-
     }
 }
 
