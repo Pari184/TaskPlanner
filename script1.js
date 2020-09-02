@@ -9,7 +9,19 @@ var checkValidDate = false;
 //div in html to append new tasks.
 const taskContainer = document.querySelector('#tasksummary');
 //Instance of TaskManager class
-const taskManager = new TaskManager(taskContainer, editTaskClicked, deleteTaskClicked);
+
+let id;
+const currentTasks = JSON.parse(localStorage.getItem("myTask")) || [];
+const currentID = JSON.parse(localStorage.getItem("currentId")) || 0;
+if ((currentTasks.length < 1) && (currentID == 0))
+{
+  id = 1;
+}
+else{
+
+  id = currentID;
+}
+const taskManager = new TaskManager(id,taskContainer, editTaskClicked, deleteTaskClicked);
 
 //Variable for add task form in html
 const taskForm = document.querySelector('#task-form');
@@ -101,6 +113,8 @@ addBtn.onclick = function() {
   function validateDateElement(dateElement,errorElement){
     var currentDate = new Date();
     let dueDateValue = new Date(dateElement.value);
+
+    
     
     if(dateElement.value == ""){
       dateElement.value = new Date().toISOString().slice(0,10);

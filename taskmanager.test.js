@@ -13,7 +13,8 @@ beforeEach(() =>{ //sets up the DOM
 
 //Test Add task in TaskManager
 test("Task Addition", () => {
-    const taskmanager = new TaskManager();
+    let id = 1;
+    const taskmanager = new TaskManager(id);
     //Add task first
     taskmanager.addTask("Task Name 1", "To buy groceries for this week", "Anuradha", "20/08/2020", "todo");
     //Verify the task added
@@ -29,7 +30,8 @@ test("Task Addition", () => {
 
 //Test update task
 test("Task Updation", () => {
-    const taskmanager = new TaskManager();
+    let id = 1;
+    const taskmanager = new TaskManager(id);
     //Add the task first
     taskmanager.addTask("Unit Testing Task 1", "To buy groceries for this week", "Anuradha", "20/08/2020", "todo");
     //Edit the added task details
@@ -45,7 +47,8 @@ test("Task Updation", () => {
 
 //Test delete task
 test("Task Deletion", () => {
-    const taskmanager = new TaskManager();
+    let id = 1;
+    const taskmanager = new TaskManager(id);
     //Add the task first
     taskmanager.addTask("Unit Testing Task 1", "To buy groceries for this week", "Anuradha", "20/08/2020", "todo");
     //Delete the added task
@@ -56,12 +59,13 @@ test("Task Deletion", () => {
 });
 
 test("HTML element added to page ", () => {
+    let id = 1;
     //Select the parent element
     let cardrow = document.querySelector("#tasksummary");
     //Instance of TaskManager class
-    const tm = new TaskManager(cardrow);
+    const tm = new TaskManager(id,cardrow);
     //Add the task
-    tm.addTask("Task 3", "To pick kids Kumon worksheets", "Anuradha", "26-08-2020", "Todo");
+    tm.addTask("Kumon Worksheets", "To pick kids Kumon worksheets", "Anuradha", "26-08-2020", "Todo");
     //Verify if the task is added by checking the length of the tasks array
     expect(tm.tasks.length).toBe(1);
     tm.display();
@@ -70,10 +74,11 @@ test("HTML element added to page ", () => {
 });
 
 test("HTML element removed from page after deleting the task ", () => {
+    let id = 1;
     //Select the parent element
     let cardrow = document.querySelector("#tasksummary");
     //Instance of TaskManager class
-    const tm = new TaskManager(cardrow);
+    const tm = new TaskManager(id,cardrow);
     //Add the task
     tm.addTask("Task 3", "To pick kids Kumon worksheets", "Anuradha", "26-08-2020", "Todo");
     //Delete the task

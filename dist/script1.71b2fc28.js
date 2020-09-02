@@ -187,11 +187,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var TaskManager = /*#__PURE__*/function () {
-  function TaskManager(parent, editTaskClicked, deleteTaskClicked) {
+  function TaskManager(id, parent, editTaskClicked, deleteTaskClicked) {
     _classCallCheck(this, TaskManager);
 
     this.tasks = [];
-    this.currentId = 1;
+    this.currentId = id;
     this.parent = parent;
     this.editTaskClicked = editTaskClicked;
     this.deleteTaskClicked = deleteTaskClicked;
@@ -281,8 +281,8 @@ var TaskManager = /*#__PURE__*/function () {
 
       if (this.tasks.length < 1) {
         //Get data from local storage
-        var displayArray = JSON.parse(localStorage.getItem("myTask")) || [];
-        console.log(displayArray); //Check if local storage is empty ( cleared )
+        var displayArray = JSON.parse(localStorage.getItem("myTask")) || []; //console.log(displayArray);
+        //Check if local storage is empty ( cleared )
 
         if (displayArray.length < 1) {
           cardheading = ""; //No cardheading in the landing page
@@ -293,6 +293,8 @@ var TaskManager = /*#__PURE__*/function () {
             this.tasks.push(dtask);
           }
 
+          var helement = document.createRange().createContextualFragment(cardheading);
+          this.parent.append(helement);
           this.tasks.forEach(function (dtask) {
             console.log(dtask);
             var taskElement = dtask.toHtmlElement(_this.editTaskClicked, _this.deleteTaskClicked);
@@ -301,8 +303,9 @@ var TaskManager = /*#__PURE__*/function () {
           });
         }
       } else {
-        var helement = document.createRange().createContextualFragment(cardheading);
-        this.parent.append(helement);
+        var _helement = document.createRange().createContextualFragment(cardheading);
+
+        this.parent.append(_helement);
         this.tasks.forEach(function (task) {
           console.log(task);
           var taskElement = task.toHtmlElement(_this.editTaskClicked, _this.deleteTaskClicked);
@@ -316,6 +319,13 @@ var TaskManager = /*#__PURE__*/function () {
     value: function displayStatus(selectedStatus) {
       var _this2 = this;
 
+      // let today = new Date();
+      // var tskDate = new Date("2020-08-29");
+      // console.log(today);
+      // console.log(tskDate);
+      // if(tskDate.getDate() === today.getDate() && tskDate.getMonth() ===today.getMonth() && tskDate.getFullYear() === today.getFullYear()){
+      // console.log("You are in Today");
+      // }
       var taskElementByStatus;
       this.parent.innerHTML = "";
 
@@ -328,6 +338,10 @@ var TaskManager = /*#__PURE__*/function () {
       this.parent.append(helement);
       this.tasks.forEach(function (task) {
         if (task.status === selectedStatus) {
+          taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
+
+          _this2.parent.append(taskElementByStatus);
+        } else if (task.date === selectedStatus) {
           taskElementByStatus = task.toHtmlElement(_this2.editTaskClicked, _this2.deleteTaskClicked);
 
           _this2.parent.append(taskElementByStatus);
@@ -364,7 +378,17 @@ var checkValidDate = false; //div in html to append new tasks.
 
 var taskContainer = document.querySelector('#tasksummary'); //Instance of TaskManager class
 
-var taskManager = new _taskmanager.default(taskContainer, editTaskClicked, deleteTaskClicked); //Variable for add task form in html
+var id;
+var currentTasks = JSON.parse(localStorage.getItem("myTask")) || [];
+var currentID = JSON.parse(localStorage.getItem("currentId")) || 0;
+
+if (currentTasks.length < 1 && currentID == 0) {
+  id = 1;
+} else {
+  id = currentID;
+}
+
+var taskManager = new _taskmanager.default(id, taskContainer, editTaskClicked, deleteTaskClicked); //Variable for add task form in html
 
 var taskForm = document.querySelector('#task-form');
 var edttask = document.querySelector("#editTask"); //Variables for add task fields
@@ -603,7 +627,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58430" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61457" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
